@@ -1,0 +1,43 @@
+{
+    "nurse_id": {
+        "$oid": "ObjectId()"
+    },
+    "name": {
+        "type": "string",
+        "required": true
+    },
+    "email": {
+        "type": "string",
+        "required": true,
+        "unique": true
+    },
+    "password": {
+        "type": "string",
+        "required": true
+    },
+    "phone": {
+        "type": "string",
+        "required": true
+    },
+    "age": {
+        "type": "number",
+        "required": true
+    },
+    "gender": {
+        "type": "string",
+        "required": true
+    },
+    "experience": {
+        "type": "number",
+        "required": true
+    },
+    "education": {
+        "type": "string",
+        "required": true
+    },
+    "reviews": {
+        "type": "array",
+        "required": true
+    },
+    "required" : ["email", "password"]
+}

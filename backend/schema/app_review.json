@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the review"
+    },
+    "app_id": {
+      "type": "string",
+      "description": "ID of the app being reviewed"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "ID of the user who wrote the review"
+    },
+    "rating": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Rating from 1 to 5 stars"
+    },
+    "review_text": {
+      "type": "string",
+      "description": "The actual review content"
+    },
+    "title": {
+      "type": "string",
+      "description": "Optional review title"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the review was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the review was last updated"
+    },
+    "helpful_votes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of users who found this review helpful"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the app when the review was written"
+    }
+  },
+  "required": [
+    "id",
+    "app_id",
+    "user_id",
+    "rating",
+    "review_text",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

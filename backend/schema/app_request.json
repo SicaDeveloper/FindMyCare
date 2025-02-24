@@ -1,0 +1,17 @@
+{
+    "request_id": {
+        "$oid": "ObjectId()"
+    },
+    "nurse_id": {
+        "type": "string",
+        "required": true
+    },
+    "user_id": {
+        "type": "string",
+        "required": true
+    },
+    "message": {
+        "type": "string",
+        "required": true
+    }
+}

@@ -1,0 +1,43 @@
+.social-icon {
+    color: #3498DB; // Changed to a professional blue color
+    font-size: 24px; // Slightly smaller, more professional size
+    margin: 0 15px 0 0;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        color: #2980B9; // Darker blue on hover
+        transform: translateY(-2px); // Subtle lift effect
+        cursor: pointer;
+    }
+    
+    &.active {
+        color: #2980B9;
+    }
+}
+
+// Additional healthcare-specific styles
+.footer-contact {
+    background-color: #ECF0F1;
+    padding: 20px;
+    border-radius: 8px;
+    
+    &__emergency {
+        color: #E74C3C;
+        font-weight: 600;
+    }
+    
+    &__hours {
+        color: #2C3E50;
+        font-size: 0.9rem;
+    }
+}
+
+// Healthcare certification badges
+.certification-badge {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+        opacity: 1;
+    }
+}

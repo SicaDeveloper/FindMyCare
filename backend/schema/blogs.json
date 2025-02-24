@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the blog post"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the blog post",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "content": {
+      "type": "string",
+      "description": "Main content of the blog post",
+      "minLength": 1
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the author"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the author"
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the blog post was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the blog post was last updated"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of tags associated with the blog post"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "archived"],
+      "description": "Current status of the blog post"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly version of the title",
+      "pattern": "^[a-z0-9-]+$"
+    }
+  },
+  "required": ["id", "title", "content", "author", "createdAt", "updatedAt", "status", "slug"],
+  "additionalProperties": false
+}
