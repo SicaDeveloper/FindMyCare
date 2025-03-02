@@ -1,37 +1,12 @@
-import { useEffect } from "react";
-import Navbar from "../ui/Navbar";
-import IsLoggedIn from "../utils/IsLoggedIn.js";
-import UserDashboard from "./UserDashboard";
-import HeroSection from "../ui/HeroSection";
-import Footer from "../ui/Footer";
-import ContentSection from "../ui/ContentSection";
-
+import Navbar from "../ui/HomePage/Navbar.jsx";
+import HeroSection from "../ui/HomePage/HeroSection.jsx";
+import Footer from "../ui/HomePage/Footer.jsx";
+import ContentSection from "../ui/HomePage/ContentSection.jsx";
 // Import styles
 import "../../css/HeroSection.scss";
 import "../../css/footer.scss";
 
 function Home() {
-  useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <div className="home-container">
-      {renderDashboard()}
-    </div>
-  );
-}
-
-function renderDashboard() {
-  if (IsLoggedIn === null || IsLoggedIn === undefined) {
-    throw new Error("IsLoggedIn is null or undefined");
-  }
-
-  if (IsLoggedIn()) {
-    return <UserDashboard />;
-  } 
-
   return (
     <>
       <Navbar />

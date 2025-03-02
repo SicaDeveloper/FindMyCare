@@ -3,7 +3,6 @@ import Toggle from "react-toggle";
 
 function DarkModeToggle() {
   const [isDark, setIsDark] = useState(true);
-
   return (
     <Toggle
       checked={isDark}
