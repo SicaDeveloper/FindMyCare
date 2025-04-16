@@ -21,7 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "openai": "^4.85.4",
-    "pkg.json": "^2.0.8",
+    "pkg.json": "^2.0.9",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
