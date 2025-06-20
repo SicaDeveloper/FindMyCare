@@ -3,12 +3,12 @@ import { styled } from "@mui/material/styles";
 import LogoButton from "../LogoButton";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import NavbarButton from "./NavbarButton";
+import { Link as RouterLink } from 'react-router-dom';
 
 // Styled components
 const StyledLink = styled(Link)(({ theme }) => ({
   color: '#fff',
   textDecoration: 'none',
-  height: '20px',
   padding: '10px 20px',
   '&:hover': {
     cursor: 'pointer',
@@ -61,6 +61,7 @@ function Navbar() {
     >
       <LogoButton />
       {mediaQuery(smallDevice)}
+      <StyledLink component={RouterLink} to="/login">Login</StyledLink>
     </AppBar>
   );
 }

@@ -7,7 +7,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 app.use(cors());
-
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         app.listen(3000, () => {
