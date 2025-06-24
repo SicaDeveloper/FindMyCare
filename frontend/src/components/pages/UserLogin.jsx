@@ -10,9 +10,6 @@ import LoginPaper from "../ui/LoginPage/LoginPaper";
 import SideImage from "../ui/LoginPage/SideImage";
 
 function LoginUser() {
-  const [email, setEmailState] = useState("");
-  const [password, setPasswordState] = useState("");
-  const [responseMessage, setResponseMessage] = useState(null);
 
   const paperStyle = {
     padding: 20,
@@ -25,44 +22,28 @@ function LoginUser() {
     margin: "8px 0",
   };
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-
-    axios
-      .post("http://localhost:3000/login", {
-        "email" : email,
-        "password" : password,
-      })
-      .then((response) => {
-        setResponseMessage(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   return (
     <Box sx={
       {
-        width:100,
-        height:100,
+        width:"100vw",
+        height:"100vh",
         padding: 10,
         bgcolor: theme.palette.primary.dark
       }
     }>
-      <Paper sx={
-        {
-          width:100,
-          height:100,
-          padding:10,
-          bgcolor: theme.palette.primary.dark
-        }
-      }>
-        <Stack>
+        <Stack sx={{
+            width: "100%",
+            height: "100%",
+            gap:24,
+            flexDirection: {
+                xs: "column",
+                sm: "row",
+            },
+            alignItems: "center",
+            }}>
             <SideImage />
             <LoginPaper />
         </Stack>
-      </Paper>
     </Box>
   );
 }

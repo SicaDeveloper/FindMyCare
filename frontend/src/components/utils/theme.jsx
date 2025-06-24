@@ -5,7 +5,7 @@ const theme = createTheme({
     primary: {
       main: '#007bff', // blue
       light: '#1dadff',
-      dark: '#1f47cd',
+      dark: '#2656BD',
     },
     secondary: {
       main: '#8400f1', 
@@ -19,7 +19,7 @@ const theme = createTheme({
     },
     text: {
 			primary: "#333333",
-			secondary: "##6A6B65",
+			secondary: "#6A6B65",
       card : "#f7f7f7",
 			disabled: "#666666",
     },
