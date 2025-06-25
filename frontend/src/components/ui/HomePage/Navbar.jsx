@@ -9,12 +9,15 @@ import { Link as RouterLink } from 'react-router-dom';
 const StyledLink = styled(Link)(({ theme }) => ({
   color: '#fff',
   textDecoration: 'none',
+  height: '20px',
+  font:"Lexend Deca",
+  fontSize:"1.2rem",
   padding: '10px 20px',
   '&:hover': {
     cursor: 'pointer',
     color: '#fff',
     opacity: 0.81,
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary['800'],
     borderBottom: '3px solid white',
     transition: 'background-color 0.3s ease-in-out, border-bottom 0.12s ease-in-out',
   }
