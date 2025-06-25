@@ -28,5 +28,5 @@ app.post("/",(req,res)=> {
 })
 
 app.post("/login",(req,res) => {
-    res.send("HelloWorld");
+    res.json({ login : true, token : "1234567890" , tokenType : "Bearer" , expiresIn : 3600});
 })

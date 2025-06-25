@@ -1,42 +1,26 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-	palette: {
-		primary: {
-			main: "#2656bd",
-			50: "#e7ebf7",
-			100: "#c2cbeb",
-			200: "#9aaadd",
-			300: "#7189d0",
-			400: "#4f6fc6",
-			500: "#2656bd",
-			600: "#1f4eb3",
-			700: "#1044a7",
-			800: "#003a9b",
-			900: "#002886",
-		},
-		secondary: {
-			main: "#38c336",
-			50: "#e8f8e8",
-			100: "#c8edc6",
-			200: "#a4e2a1",
-			300: "#7dd778",
-			400: "#5ccd58",
-			500: "#38c336",
-			600: "#2db32c",
-			700: "#1ba11f",
-			800: "#008f10",
-			900: "#007000",
-		},
-		background: {
+  palette: {
+    primary: {
+      main: '#007bff', // blue
+      light: '#1dadff',
+      dark: '#2656BD',
+    },
+    secondary: {
+      main: '#8400f1', 
+      light: '#ad6bf7',
+      dark: '#5800dd',
+    },
+    background: {
 			default: "#ffffff",
 			paper: "#f7f7f7",
 			info: "#1f1f1f",
 		},
 		text: {
 			primary: "#333333",
-			secondary: "##6A6B65",
-			card: "#f7f7f7",
+			secondary: "#6A6B65",
+      card : "#f7f7f7",
 			disabled: "#666666",
 		},
 	},
