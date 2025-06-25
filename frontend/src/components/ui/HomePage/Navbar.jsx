@@ -1,15 +1,14 @@
-import { AppBar, Link, Container } from "@mui/material";
+import { AppBar, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LogoButton from "../LogoButton";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import NavbarButton from "./NavbarButton";
-import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Styled components
 const StyledLink = styled(Link)(({ theme }) => ({
   color: '#fff',
   textDecoration: 'none',
-  height: '20px',
   font:"Lexend Deca",
   fontSize:"1.2rem",
   padding: '10px 20px',
@@ -35,8 +34,8 @@ function mediaQuery(screenSize) {
   return (
     <StyledContainer>
       <StyledLink to='/'>Home</StyledLink>
-      <StyledLink to='/'>About</StyledLink>
-      <StyledLink to='/'>Contact</StyledLink>
+      <StyledLink to='/about'>About</StyledLink>
+      <StyledLink to='/contactUs'>Contact</StyledLink>
     </StyledContainer>
   );
 }
@@ -64,7 +63,7 @@ function Navbar() {
     >
       <LogoButton />
       {mediaQuery(smallDevice)}
-      <StyledLink component={RouterLink} to="/login">Login</StyledLink>
+      <StyledLink to="/login">Login</StyledLink>
     </AppBar>
   );
 }
