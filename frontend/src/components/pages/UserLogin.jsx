@@ -7,7 +7,7 @@ import {
 import { Box, Stack } from "@mui/system";
 import theme from "../utils/theme";
 import LoginPaper from "../ui/LoginPage/LoginPaper";
-import SideImage from "../ui/LoginPage/SideImage";
+import SideImage from "../ui/LoginPage/LoginSideImage";
 
 function LoginUser() {
 

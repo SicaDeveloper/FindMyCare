@@ -37,11 +37,9 @@ const Footer = () => {
 				flexDirection: "column",
 				justifyContent: "space-evenly",
 				alignItems: "stretch",
-				[useTheme().breakpoints.down("md")]: {
-					gap: "5px",
-					padding: "20px 0 20px 0",
-				},
-			}}
+				gap: "5px",
+				py: { xs: 2, md: 4 },
+				}}
 		>
 			<Stack
 				sx={{

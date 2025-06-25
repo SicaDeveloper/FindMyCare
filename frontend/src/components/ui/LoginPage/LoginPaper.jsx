@@ -4,72 +4,15 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/system';
-import {
-    OutlinedInput, InputLabel
-    , Button
-} from '@mui/material';
-import Link from '@mui/material/Link';
+import { StyledInput, StyledInputLabel, StyledButton, StyledImage } from '../../utils/theme';
+import { Link } from 'react-router-dom';
 import googleIcon from '../../../media/icons8-google-48.png';
 import instagramIcon from '../../../media/icons8-instagram-48-2.png';
 import linkedinIcon from '../../../media/icons8-linkedin-48.png';
 import { useState } from 'react';
 
-const StyledInput = styled(OutlinedInput)(({ theme }) => ({
-    width: '100%',
-    borderRadius: 4,
-    backgroundColor: theme.palette.background.default,
-    marginBottom: theme.spacing(2),
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1.5),
-        fontSize: '1rem',
-    }
-}));
 
-const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
-    paddingLeft: theme.spacing(0.5),
-    fontFamily: 'Lexend Deca, sans-serif',
-    fontWeight: '600',
-    color: theme.palette.text.secondary,
-    fontSize: '1rem',
-    '&.Mui-focused': {
-        color: theme.palette.primary.main,
-    },
-    '&.Mui-error': {
-        color: theme.palette.error.main,
-    },
-    '&.Mui-disabled': {
-        color: theme.palette.text.disabled,
-    },
-    '&.MuiFormLabel-filled': {
-        color: theme.palette.text.primary,
-    },
-}));
-
-const StyledButton = styled(Button)(({ theme }) => ({
-    fontFamily: 'Lexend Deca, sans-serif',
-    fontWeight: '400',
-    borderRadius: 8,
-    textTransform: 'none',
-    width: '70%',
-    alignSelf: 'center',
-    padding: theme.spacing(1.5),
-    fontSize: '1rem',
-    backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.common.white,
-}));
-
-const StyledImage = styled('img')(({ theme }) => ({
-    width: '60px',
-    height: '60px',
-    objectFit: 'contain',
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-        transform: 'scale(1.05)',
-    },
-}));
-
-const sendData = async (email,password) => {
+const sendLoginCredentials = async (email, password) => {
 
     const data = {
         email: email,
@@ -92,30 +35,29 @@ const sendData = async (email,password) => {
         console.error("Password must be at least 6 characters long");
         return;
     }
-  try {
-    const response = await axios.post("http://localhost:3000/login", data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.data.login == true)
-    {
-        window.location.href = "/dashboard";
-    } else {
-        console.error("Login failed:", response.data.message);
-        // Handle login failure (e.g., show an error message)
+    try {
+        const response = await axios.post("http://localhost:3000/login", data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.data.login == true) {
+            window.location.href = "/dashboard";
+        } else {
+            console.error("Login failed:", response.data.message);
+            // Handle login failure (e.g., show an error message)
+        }
+        // Return the response data if needed
+        console.log("Response from backend:", response.data);
+    } catch (error) {
+        console.error("Error:", error);
     }
-     // Return the response data if needed
-    console.log("Response from backend:", response.data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
 };
 
 function LoginPaper() {
 
-      const [email, setEmailState] = useState("");
-      const [password, setPasswordState] = useState("");
+    const [email, setEmailState] = useState("");
+    const [password, setPasswordState] = useState("");
 
     return (
         <Paper
@@ -137,10 +79,10 @@ function LoginPaper() {
                 borderRadius: 8,
             }}
         >   <Box sx={{
-            height: '70%',
+            height: '80%',
             display: 'flex',
             flexDirection: 'column',
-            gap: 0.9,
+            gap: 1,
             py: 2,
             px: 1,
         }}>
@@ -167,25 +109,27 @@ function LoginPaper() {
                         fontSize: '0.9rem',
                     }} variant='h6'>Don't have an account? <Link to="/register">Sign Up</Link></Typography>
                 </Stack>
-                <StyledInputLabel>Email</StyledInputLabel>
-                <StyledInput
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmailState(e.target.value)}
-                    type="email"
-                    fullWidth
-                    required
-                    sx={{ mb: 2 }} />
-                <StyledInputLabel>Password</StyledInputLabel>
-                <StyledInput
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPasswordState(e.target.value)}
-                    type="password"
-                    fullWidth
-                    required
-                    sx={{ mb: 4 }} />
-                <StyledButton onClick={() => sendData(email,password)}>Sign In</StyledButton>
+                <Stack>
+                    <StyledInputLabel>Email</StyledInputLabel>
+                    <StyledInput
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmailState(e.target.value)}
+                        type="email"
+                        fullWidth
+                        required
+                        sx={{ mb: 2 }} />
+                </Stack>
+                <Stack><StyledInputLabel>Password</StyledInputLabel>
+                    <StyledInput
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPasswordState(e.target.value)}
+                        type="password"
+                        fullWidth
+                        required
+                        sx={{ mb: 4 }} /></Stack>
+                <StyledButton onClick={() => sendLoginCredentials(email, password)}>Sign In</StyledButton>
             </Box>
             <hr />
             <Stack sx={{

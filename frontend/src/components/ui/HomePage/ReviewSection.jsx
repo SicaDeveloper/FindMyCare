@@ -111,7 +111,7 @@ const ReviewSection = ({ reviews = defaultReviews }) => {
 				<Typography
 					variant='h4'
 					sx={{
-						textAlign: "center",
+						textalign: "center",
 						mb: 6,
 						color: "text.primary",
 					}}

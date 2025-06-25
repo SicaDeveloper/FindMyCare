@@ -1,4 +1,9 @@
 import { createTheme } from '@mui/material/styles';
+import { styled } from '@mui/system';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button';
+
 
 const theme = createTheme({
   palette: {
@@ -105,5 +110,62 @@ const theme = createTheme({
   },
 });
 
+
+const StyledInput = styled(OutlinedInput)(({ theme }) => ({
+    width: '100%',
+    borderRadius: 4,
+    backgroundColor: theme.palette.background.default,
+    marginBottom: theme.spacing(2),
+    '& .MuiInputBase-input': {
+        padding: theme.spacing(1.5),
+        fontSize: '1rem',
+    }
+}));
+
+const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
+    paddingLeft: theme.spacing(0.5),
+    fontFamily: 'Lexend Deca, sans-serif',
+    fontWeight: '600',
+    color: theme.palette.text.secondary,
+    marginBottom: theme.spacing(0.5),
+    fontSize: '1rem',
+    '&.Mui-focused': {
+        color: theme.palette.primary.main,
+    },
+    '&.Mui-error': {
+        color: theme.palette.error.main,
+    },
+    '&.Mui-disabled': {
+        color: theme.palette.text.disabled,
+    },
+    '&.MuiFormLabel-filled': {
+        color: theme.palette.text.primary,
+    },
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+    fontFamily: 'Lexend Deca, sans-serif',
+    fontWeight: '400',
+    borderRadius: 8,
+    textTransform: 'none',
+    width: '70%',
+    alignSelf: 'center',
+    padding: theme.spacing(1.5),
+    fontSize: '1rem',
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.common.white,
+}));
+
+const StyledImage = styled('img')(({ theme }) => ({
+    width: '60px',
+    height: '60px',
+    objectFit: 'contain',
+    transition: 'transform 0.3s ease',
+    '&:hover': {
+        transform: 'scale(1.05)',
+    },
+}));
+
+export { StyledInput, StyledInputLabel, StyledButton, StyledImage };
 export default theme;
 
