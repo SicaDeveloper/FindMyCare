@@ -3,27 +3,81 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { StyledInput, StyledInputLabel, StyledButton, StyledImage} from '../../utils/theme';
-import { Link } from 'react-router-dom';
+import { StyledInput, StyledInputLabel, StyledButton, StyledImage } from '../../utils/theme';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import googleIcon from '../../../media/icons8-google-48.png';
 import instagramIcon from '../../../media/icons8-instagram-48-2.png';
 import linkedinIcon from '../../../media/icons8-linkedin-48.png';
 import { useState } from 'react';
 
 
-function sendRegisterRequest(email, password) {
-    
-}
-
 function checkPasswordMatch(password, retypePassword) {
     return password === retypePassword;
 }
 
-function RegisterPaper({ children }) {
+function RegisterPaper() {
 
-  const [email, setEmailState] = useState("");
-  const [password, setPasswordState] = useState("");
-  const [retypePassword, setRetypePasswordState] = useState("");
+    const [email, setEmailState] = useState("");
+    const [password, setPasswordState] = useState("");
+    const [retypePassword, setRetypePasswordState] = useState("");
+    const navigate = useNavigate();
+
+    async function sendRegisterRequest(email, password, retypePassword, role) {
+
+    // Check if passwords match
+    if (!checkPasswordMatch(password, retypePassword)) {
+        console.error("Passwords do not match");
+        return;
+    }
+
+    const data = {
+        email: email,
+        password: password,
+        retypePassword: retypePassword,
+        role: role, // 'nurse' or 'careseeker'
+    };
+
+    if (!email || !password) {
+        console.error("Email and password are required");
+        return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        console.error("Invalid email format");
+        return;
+    }
+    // Validate password length
+    if (password.length < 6) {
+        console.error("Password must be at least 6 characters long");
+        return;
+    }
+
+    try {
+        const response = await axios.post("http://localhost:3000/register", data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.data.register == true) {
+            if (response.data.user.role === "nurse") {
+                navigate("/register/nurse",{ state: { email: email, password: password } });
+            } else if (response.data.role === "careseeker") {
+                navigate("/register/careseeker",{ state: { email: email, password: password } });   
+            } else{
+                console.error("Unknown role:", response.data.role);
+            }
+        } else {
+            console.error("Your registration has failed:", response.data.message);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 
     return (
         <Paper elevation={3}
@@ -98,7 +152,15 @@ function RegisterPaper({ children }) {
                     fullWidth
                     required
                     sx={{ mb: 2 }} />
-                <StyledButton>Sign Up</StyledButton>
+                <Stack sx={{
+                    width: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mt: 2,
+                }} spacing={2}>
+                    <StyledButton onClick={() => sendRegisterRequest(email, password, retypePassword, "nurse")}>Sign Up as a Nurse</StyledButton>
+                    <StyledButton onClick={() => sendRegisterRequest(email, password, retypePassword,"careseeker")}>Sign Up as a Patient</StyledButton>
+                </Stack>
             </Box>
             <hr />
             <Stack sx={{

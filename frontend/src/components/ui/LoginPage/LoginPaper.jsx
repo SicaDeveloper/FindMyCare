@@ -12,7 +12,7 @@ import linkedinIcon from '../../../media/icons8-linkedin-48.png';
 import { useState } from 'react';
 
 
-const sendLoginCredentials = async (email, password) => {
+async function sendLoginCredentials(email, password){
 
     const data = {
         email: email,

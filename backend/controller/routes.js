@@ -12,7 +12,7 @@ router.post("/login",(req,res) => {
 })
 
 router.post("/register",(req,res) => {
-    res.json({ register : true});
+    res.json({ register : true, user: {email: req.body.email, password : req.body.password, role : req.body.role} });
 })
 
 router.post("/login", (req, res) => {
@@ -20,7 +20,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
-    res.json({ profile: true });
+    res.json({ profile: true, });
 });
 
 module.exports = router;

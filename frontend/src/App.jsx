@@ -21,7 +21,7 @@ function App() {
           <Route path="/login" element={<UserLogin />} />
           <Route path="/register" element={<RegisterUser />} />
           <Route path='/register/nurse' element={<RegisterNurse />}/>
-          <Route path='/register/user' element={<RegisterCareSeeker />}/>
+          <Route path='/register/careseeker' element={<RegisterCareSeeker />}/>
         </Routes>
       </Router>
     </ThemeProvider>
