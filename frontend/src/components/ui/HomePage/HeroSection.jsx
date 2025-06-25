@@ -3,29 +3,31 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import video from "../../../media/hero-background-video.mp4";
 import "../../../css/HeroSection.scss";
-
+import theme from "../../utils/theme";
 
 const HeroSection = () => {
 	return (
 		<Box
 			sx={{			
-				height: "90svh"
+				height: "90svh",
 			}}
 		>
 			<video className="hero-section-video" autoPlay src={video} loop muted></video>
 			<Container
+				maxWidth={false}
 				sx={{
 					display: "flex",
 					flexDirection: { xs: 'column', md: 'row' },
-					justifyContent: "space-between",
+					justifyContent: "space-around",
 					alignItems: "center",
-					height: "100vh",
-					gap: 2,
+					height: "90vh",
+					gap: 1,
+					width: "80svw"
 				}}
 			>
 				<Stack 
-					flexGrow={2} 
-					spacing={3}
+					flexGrow={3} 
+					spacing={1}
 					sx={{
 						textAlign: { xs: 'center', md: 'left' },
 						paddingTop: { xs: 10, md: 0 }
@@ -36,8 +38,8 @@ const HeroSection = () => {
 						sx={{
 							color: '#Ffffe0',
 							fontWeight: 1000,
-							fontSize: { xs: '2.5rem', md: '3.5rem' },
-							marginBottom: 2
+							fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4.6rem' },
+							marginBottom: 3
 						}}
 					>
 						Your Destination to Excellent Homecare
@@ -68,30 +70,49 @@ const HeroSection = () => {
 					spacing={1}
 					sx={{
 						alignItems: { xs: 'center', md: 'flex-start' },
-						marginBottom: { xs: 20, md: 0 },
+						marginBottom: { xs: 20, md: 0, lg: -5 },
 					}}
 				>
 					<Button 
 						variant='contained'
 						size="large"
 						sx={{
-							backgroundColor: '#3498DB',
-							fontSize: '1rem',
+							backgroundColor: theme.palette.primary['300'],
+							whiteSpace: 'nowrap',
+							padding: {
+								xs: '20px 30px',
+								md: '20px 60px',
+								lg: '20px 70px'
+							},
+							fontSize: {
+								xs: "1.1rem",
+								md: "1.2rem",
+								lg: "1.3rem"
+							},
 							'&:hover': {
 								backgroundColor: '#2980B9'
 							}
 						}}
 					>
-						Find a Caregiver
+						Get Started
 					</Button>
 					<Button 
 						variant='outlined'
 						size="large"
 						sx={{
+							whiteSpace: 'nowrap',
 							borderColor: '#ffffe0',
 							color: '#ffffe0',
-							padding: '12px 32px',
-							fontSize: '1.1rem',
+							padding: {
+								xs: '20px 30px',
+								md: '20px 60px',
+								lg: '20px 70px'
+							},
+							fontSize: {
+								xs: "1.1rem",
+								md: "1.2rem",
+								lg: "1.3rem"
+							},
 							'&:hover': {
 								borderColor: '#2980B9',
 								backgroundColor: 'rgba(52, 152, 219, 0.1)'

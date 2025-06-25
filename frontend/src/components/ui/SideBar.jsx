@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
 	AppBar,
@@ -7,146 +8,27 @@ import {
 	Divider,
 	Drawer,
 	IconButton,
-	List,
+	Toolbar,
+} from "@mui/material";
+import {
 	ListItem,
-	ListItemButton,
 	ListItemIcon,
 	ListItemText,
-	Toolbar,
-	Link,
-	Typography,
+	ListItemButton,
 } from "@mui/material";
-import { useNavigate, Link as RouterLink } from "react-router-dom"; // Added RouterLink
-import {
-	MoveToInbox as InboxIcon,
-	Mail as MailIcon,
-	Menu as MenuIcon,
-} from "@mui/icons-material";
+// Added RouterLink
+import Typography from '@mui/material/Typography';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SideBarItems from "./SideBarItems";
+import Avatar from '@mui/material/Avatar';
 import LogoButton from "./LogoButton";
-
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonIcon from "@mui/icons-material/Person";
-import AssessmentIcon from "@mui/icons-material/Assessment";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import DescriptionIcon from "@mui/icons-material/Description";
-
+import MenuIcon from "@mui/icons-material/Menu";
+import theme from "../utils/theme";
 const drawerWidth = 70;
 
 function ResponsiveDrawer(props) {
 	const [mobileOpen, setMobileOpen] = React.useState(false);
 	const [isClosing, setIsClosing] = React.useState(false);
-
-	const navigate = useNavigate();
-
-	const adminSidebarItems = [
-		{
-			id: 1,
-			icon: <DashboardIcon />,
-			text: "Admin Dashboard",
-			path: "/admin/dashboard",
-		},
-		{
-			id: 2,
-			icon: <PersonIcon />,
-			text: "Users",
-			path: "/admin/users",
-		},
-		{
-			id: 3,
-			icon: <PersonIcon />,
-			text: "Nurses",
-			path: "/admin/nurses",
-		},
-		{
-			id: 4,
-			icon: <PersonIcon />,
-			text: "Patients",
-			path: "/admin/patients",
-		},
-		{
-			id: 5,
-			icon: <AssessmentIcon />,
-			text: "Reports",
-			path: "/admin/reports",
-		},
-	].map((item) => ({
-		...item,
-		onClick: () => navigate(item.path),
-	}));
-
-	const nurseSidebarItems = [
-		{
-			id: 1,
-			icon: <DashboardIcon />,
-			text: "Nurse Dashboard",
-			path: "/nurse/dashboard",
-		},
-		{
-			id: 2,
-			icon: <PersonIcon />,
-			text: "Patients",
-			path: "/nurse/patients",
-		},
-		{
-			id: 3,
-			icon: <AssessmentIcon />,
-			text: "Reports",
-			path: "/nurse/reports",
-		},
-	].map((item) => ({
-		...item,
-		onClick: () => navigate(item.path),
-	}));
-
-	const patientSidebarItems = [
-		{
-			id: 1,
-			icon: <DashboardIcon />,
-			text: "User Dashboard",
-			path: "/dashboard",
-		},
-		{
-			id: 2,
-			icon: <PersonIcon />,
-			text: "Profile",
-			path: "/profile",
-		},
-		{
-			id: 3,
-			icon: <MailIcon />,
-			text: "Messages",
-			path: "/messages",
-		},
-		{
-			id: 4,
-			icon: <CalendarMonthIcon />,
-			text: "Appointments",
-			path: "/appointments",
-		},
-		{
-			id: 5,
-			icon: <DescriptionIcon />,
-			text: "Medical Records",
-			path: "/medical-records",
-		},
-	].map((item) => ({
-		...item,
-		onClick: () => navigate(item.path),
-	}));
-
-	const getSidebarItems = (userType) => {
-		switch (userType) {
-			case "Admin":
-				return adminSidebarItems;
-			case "Nurse":
-				return nurseSidebarItems;
-			case "Patient":
-			case "User":
-				return patientSidebarItems;
-			default:
-				return patientSidebarItems;
-		}
-	};
 
 	const handleDrawerClose = () => {
 		setIsClosing(true);
@@ -163,8 +45,10 @@ function ResponsiveDrawer(props) {
 		}
 	};
 
+	const navigate = useNavigate();
+
 	const drawer = (
-		<div>
+		<Box>
 			<Toolbar
 				sx={{ display: "flex", justifyContent: "center" }}
 				disableGutters
@@ -173,39 +57,72 @@ function ResponsiveDrawer(props) {
 			</Toolbar>
 
 			<Divider />
-			<List>
-				{getSidebarItems(props.isUser).map((item) => (	
-					<ListItem key={item.id} disablePadding>
-						<ListItemButton
-							onClick={item.onClick}
-							sx={{
-								justifyContent: "center",
-							}}
-						>
-							<ListItemIcon
-								sx={{ justifyContent: "center",p:1, fontSize: "1.4rem" }}
-							>
-								{item.icon}
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
-				))}
-			</List>
+			<SideBarItems userType={props.isUser} />
 			<Divider />
-		</div>
+			<ListItem
+								key={"Logout"}
+								disablePadding
+								sx={{ 
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+									overflowX : "hidden",
+									maxHeight : "80px"
+								 }}
+							>
+								<ListItemButton
+									onClick={() => navigate("/logout")}
+									sx={{
+										minHeight: 48,
+										justifyContent: open ? "initial" : "center",
+										px: 2.5,
+										py: 2.5,
+									}}
+								>
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											color: theme.palette.primary["400"],
+											fontSize: "30px",
+											justifyContent: "center",
+										}}
+									>
+										<LogoutIcon />
+									</ListItemIcon>
+									<ListItemText
+									sx={
+										{
+											ml:"30px",
+											whiteSpace: "nowrap",
+										}
+									}>
+										Logout
+									</ListItemText>
+								</ListItemButton>
+							</ListItem>
+		</Box>
 	);
 
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
-			<AppBar
-				position='fixed'
+			<AppBar 
 				sx={{
-					width: { sm: `calc(100% - ${drawerWidth}px)` },
-					ml: { sm: `${drawerWidth}px` },
+					opacity:0.8,
+					height: "8vh",
+					width: {
+						sm: `calc(100% - ${drawerWidth}px)`,
+						md: `calc(100% - ${drawerWidth}px)`,
+						lg: `calc(100% - ${drawerWidth}px)`,
+					},
 				}}
 			>
-				<Toolbar>
+				<Toolbar
+				sx={{
+					display: "flex",
+					justifyContent: "flex-end",
+					alignContent: "center",
+				}}>
 					<IconButton
 						color='inherit'
 						aria-label='open drawer'
@@ -219,6 +136,7 @@ function ResponsiveDrawer(props) {
 					>
 						<MenuIcon />
 					</IconButton>
+					<Avatar>N</Avatar>
 				</Toolbar>
 			</AppBar>
 			<Box
@@ -253,7 +171,13 @@ function ResponsiveDrawer(props) {
 						display: { xs: "none", sm: "block" },
 						"& .MuiDrawer-paper": {
 							boxSizing: "border-box",
-							width: drawerWidth,
+							width: {
+								sm: drawerWidth,
+								"&:hover": {
+									transition: "width 0.4s ease-in-out",
+									width: "20rem",
+								},
+							},
 						},
 					}}
 					open

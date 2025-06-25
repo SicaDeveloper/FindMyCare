@@ -13,16 +13,16 @@
     "email": {
       "type": "string",
       "format": "email",
+      "unique": true,
       "description": "Email address of the user"
     },
     "phone": {
       "type": "string",
       "description": "Phone number of the user"
     },
-    "age": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Age of the user"
+    "date_of_birth": {
+      "type": "string",
+      "format": "date"
     },
     "gender": {
       "type": "string",
@@ -42,6 +42,39 @@
       "type": "string",
       "enum": ["user", "admin"],
       "description": "Role of the user in the system"
+    },
+    "medication": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Medication of the user"
+      }
+    },
+    "medical_history": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Medical history of the user"
+      }
+    },
+    "appointment":{
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Appointment of the user"
+      }
+    },
+    "allergies":{
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Allergies of the user"
+      }
+    }
+    ,"citizenship_id": {
+      "type": "string",
+      "description": "Citizenship ID of the user",
+      "unique": true
     }
   },
   "required": ["id", "name", "email", "phone", "age", "gender", "blood_group", "password", "role"],
