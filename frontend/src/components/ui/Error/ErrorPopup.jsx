@@ -1,8 +1,12 @@
+import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
-import { Grow } from '@mui/material';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import React from 'react';
+
 
 const StyledSnackbarContent = styled(SnackbarContent)(({ theme }) => ({
     backgroundColor: theme.palette.error.main,
@@ -12,48 +16,51 @@ const StyledSnackbarContent = styled(SnackbarContent)(({ theme }) => ({
     borderRadius: 8,
     padding: theme.spacing(2),
     fontSize: '1rem',
-    width: '400px',
+    width: '350px',
+    py:2,
     margin: '20px auto',
     textAlign: 'center',
-    boxShadow: theme.shadows[5],
-    '& .MuiSnackbarContent-message': {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    '& .MuiSnackbarContent-action': {
-        display: 'none',
-    },
 }));
 
 function ErrorPopup({ errorMessage, onClose }) {
     const theme = useTheme();
-    const [open, setOpen] = useState(true);
 
-    useEffect(() => {
-        if (errorMessage) {
-            setOpen(true);
-        }
-    }, [errorMessage]);
+    const[state, setState] = useState({
+        open: false,
+        Transition: Fade,
+    });
 
-    const handleClose = () => { 
-        setOpen(false);
-        onClose();
+    const handleClick = (Transition) => () => {
+        setState({
+            open: true,
+            Transition,
+        });
+    };
+
+    const handleClose = () => {
+        setState({
+            ...state,
+            open: false,
+        });
     };
 
     return (
-        <StyledSnackbarContent
-            open={open}
-            message={errorMessage}
+        <Snackbar
+            open={!!errorMessage}
+            autoHideDuration={5000}
+            onClose={onClose}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            autoHideDuration={6000}
-            slots={{ transition: GrowTransition }}
-            action={
-                <Button color="inherit" onClick={handleClose}>
-                    Close
-                </Button>
-            }
-            onClose={handleClose}
-        />
+        >
+            <StyledSnackbarContent
+                message={errorMessage}
+                action={
+                    <Button color="inherit" size="small" onClick={onClose}>
+                        Close
+                    </Button>
+                }
+            />
+        </Snackbar>
     );
 }
+
+export default ErrorPopup;

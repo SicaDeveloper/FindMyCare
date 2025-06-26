@@ -10,7 +10,7 @@ import googleIcon from '../../../media/icons8-google-48.png';
 import instagramIcon from '../../../media/icons8-instagram-48-2.png';
 import linkedinIcon from '../../../media/icons8-linkedin-48.png';
 import { useState } from 'react';
-
+import { useOutletContext } from 'react-router-dom';
 
 function checkPasswordMatch(password, retypePassword) {
     return password === retypePassword;
@@ -21,13 +21,14 @@ function RegisterPaper() {
     const [email, setEmailState] = useState("");
     const [password, setPasswordState] = useState("");
     const [retypePassword, setRetypePasswordState] = useState("");
+    const setErrorMessage= useOutletContext();
     const navigate = useNavigate();
 
     async function sendRegisterRequest(email, password, retypePassword, role) {
 
     // Check if passwords match
     if (!checkPasswordMatch(password, retypePassword)) {
-        console.error("Passwords do not match");
+        setErrorMessage("Passwords do not match");
         return;
     }
 
@@ -39,19 +40,19 @@ function RegisterPaper() {
     };
 
     if (!email || !password) {
-        console.error("Email and password are required");
+        setErrorMessage("Email and password are required");
         return;
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        console.error("Invalid email format");
+        setErrorMessage("Invalid email format");
         return;
     }
     // Validate password length
     if (password.length < 6) {
-        console.error("Password must be at least 6 characters long");
+        setErrorMessage("Password must be at least 6 characters long");
         return;
     }
 

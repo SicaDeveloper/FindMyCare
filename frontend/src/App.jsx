@@ -1,29 +1,21 @@
 import Home from './components/pages/Home.jsx'
-import {ThemeProvider} from '@mui/material'
+import { ThemeProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import theme from './components/utils/theme.jsx'
-import UserDashboard from './components/pages/UserDashboard.jsx'
-import UserLogin from './components/pages/UserLogin.jsx'
-import RegisterUser from './components/pages/RegisterUser.jsx'
-import RegisterNurse from './components/pages/RegisterNurse.jsx'
-import RegisterCareSeeker from './components/pages/RegisterCareSeeker.jsx'
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
-import IsLoggedIn from '../../backend/util/IsLoggedIn.js'
+import ErrorPopup from './components/ui/Error/ErrorPopup.jsx'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+
 
 function App() {
+  
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/" element={ IsLoggedIn() ?<Navigate to="/dashboard" /> : <Home /> } />
-          <Route path="/dashboard" element={<UserDashboard />} />
-          <Route path="/login" element={<UserLogin />} />
-          <Route path="/register" element={<RegisterUser />} />
-          <Route path='/register/nurse' element={<RegisterNurse />}/>
-          <Route path='/register/careseeker' element={<RegisterCareSeeker />}/>
-        </Routes>
-      </Router>
+      {errorMessage && <ErrorPopup errorMessage={errorMessage} onClose={() => setErrorMessage("")} />}
+      <Outlet context={setErrorMessage} />
     </ThemeProvider>
   )
 }
