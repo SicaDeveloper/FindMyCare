@@ -22,7 +22,7 @@
     "express": "^4.21.2",
     "findmycare": "file:",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.16.0",
     "openai": "^4.85.4",
     "pkg.json": "^2.0.9",
     "socket.io": "^4.8.1",
