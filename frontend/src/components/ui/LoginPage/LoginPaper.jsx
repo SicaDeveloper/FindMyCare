@@ -5,14 +5,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { StyledInput, StyledInputLabel, StyledButton, StyledImage } from '../../utils/theme';
+import { useOutletContext } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import googleIcon from '../../../media/icons8-google-48.png';
 import instagramIcon from '../../../media/icons8-instagram-48-2.png';
 import linkedinIcon from '../../../media/icons8-linkedin-48.png';
 import { useState } from 'react';
 
+function LoginPaper() {
 
-async function sendLoginCredentials(email, password){
+    const [email, setEmailState] = useState("");
+    const [password, setPasswordState] = useState("");
+    const setErrorMessage = useOutletContext();
+
+    async function sendLoginCredentials(email, password){
 
     const data = {
         email: email,
@@ -20,14 +26,14 @@ async function sendLoginCredentials(email, password){
     };
 
     if (!email || !password) {
-        console.error("Email and password are required");
+        setErrorMessage("Email and password are required");
         return;
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        console.error("Invalid email format");
+        setErrorMessage("Invalid email format");
         return;
     }
     // Validate password length
@@ -44,20 +50,15 @@ async function sendLoginCredentials(email, password){
         if (response.data.login == true) {
             window.location.href = "/dashboard";
         } else {
-            console.error("Login failed:", response.data.message);
+            setErrorMessage("Login failed:", response.data.message);
             // Handle login failure (e.g., show an error message)
         }
         // Return the response data if needed
         console.log("Response from backend:", response.data);
     } catch (error) {
-        console.error("Error:", error);
+        setErrorMessage("Error:", error);
     }
 };
-
-function LoginPaper() {
-
-    const [email, setEmailState] = useState("");
-    const [password, setPasswordState] = useState("");
 
     return (
         <Paper
