@@ -19,13 +19,33 @@
         "type": "string",
         "required": true
     },
-    "age": {
-        "type": "number",
-        "required": true
-    },
     "gender": {
         "type": "string",
         "required": true
+    },
+    "panNumber": {
+        "type": "string",
+        "required": true
+    },
+    "dateOfBirth": {
+        "type": "string", 
+        "required": true
+    },
+    "citizenshipNumber": {
+        "type": "string",
+        "required": true
+    },
+    "citizenshipIssuedDate": {
+        "type": "string", 
+        "required": true
+    },
+    "citizenshipFrontPath": {
+        "type": "string",
+        "required": false 
+    },
+    "citizenshipBackPath": {
+        "type": "string",
+        "required": false 
     },
     "experience": {
         "type": "number",
@@ -33,7 +53,7 @@
     },
     "reviews": {
         "type": "array",
-        "required": true
+        "default": [] 
     },
-    "required" : ["email", "password"]
+    "required" : ["name", "email", "password", "phone", "gender", "panNumber", "dateOfBirth", "citizenshipNumber", "citizenshipIssuedDate", "experience"]
 }
