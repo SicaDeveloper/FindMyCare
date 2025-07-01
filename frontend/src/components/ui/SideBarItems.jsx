@@ -7,6 +7,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DescriptionIcon from "@mui/icons-material/Description";
 import PropTypes from "prop-types";
 import MessageIcon from '@mui/icons-material/Message';
+
 import {
 	ListItem,
 	ListItemIcon,
@@ -54,17 +55,23 @@ const SideBarItems = (props) => {
 		{
 			id: 1,
 			icon: <DashboardIcon />,
-			text: "Nurse Dashboard",
+			text: "Dashboard",
 			path: "/nurse/dashboard",
 		},
 		{
-			id: 2,
+			id:2,
+			icon : <CalendarMonthIcon/>,
+			text: "Bookings",
+			path: "/nurse/booking"
+		},
+		{
+			id: 3,
 			icon: <PersonIcon />,
 			text: "Patients",
 			path: "/nurse/patients",
 		},
 		{
-			id: 3,
+			id: 4,
 			icon: <AssessmentIcon />,
 			text: "Reports",
 			path: "/nurse/reports",
@@ -145,7 +152,7 @@ const SideBarItems = (props) => {
 						<ListItemIcon
 							sx={{
 								minWidth: 0,
-								color: theme.palette.primary["400"],
+								color: (theme) => theme.palette.primary.dark,
 								fontSize: "30px",
 								justifyContent: "center",
 							}}

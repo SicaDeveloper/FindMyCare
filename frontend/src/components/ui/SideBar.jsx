@@ -2,12 +2,10 @@ import * as React from "react";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
-	AppBar,
 	Box,
 	CssBaseline,
 	Divider,
 	Drawer,
-	IconButton,
 	Toolbar,
 } from "@mui/material";
 import {
@@ -17,18 +15,21 @@ import {
 	ListItemButton,
 } from "@mui/material";
 // Added RouterLink
-import Typography from '@mui/material/Typography';
+import { useState } from "react";
 import LogoutIcon from '@mui/icons-material/Logout';
 import SideBarItems from "./SideBarItems";
-import Avatar from '@mui/material/Avatar';
 import LogoButton from "./LogoButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import theme from "../utils/theme";
+import BottomNavigation from '@mui/material/BottomNavigation';
+import Paper from '@mui/material/Paper';
+import BottomNavItems from './BottomNavItems';
+
 const drawerWidth = 70;
 
 function ResponsiveDrawer(props) {
-	const [mobileOpen, setMobileOpen] = React.useState(false);
-	const [isClosing, setIsClosing] = React.useState(false);
+	const [mobileOpen, setMobileOpen] = useState(false);
+	const [isClosing, setIsClosing] = useState(false);
+	const [activeIcon, setActiveIcon] = useState(null);
 
 	const handleDrawerClose = () => {
 		setIsClosing(true);
@@ -60,111 +61,83 @@ function ResponsiveDrawer(props) {
 			<SideBarItems userType={props.isUser} />
 			<Divider />
 			<ListItem
-								key={"Logout"}
-								disablePadding
-								sx={{ 
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-									overflowX : "hidden",
-									maxHeight : "80px"
-								 }}
-							>
-								<ListItemButton
-									onClick={() => navigate("/logout")}
-									sx={{
-										minHeight: 48,
-										justifyContent: open ? "initial" : "center",
-										px: 2.5,
-										py: 2.5,
-									}}
-								>
-									<ListItemIcon
-										sx={{
-											minWidth: 0,
-											color: theme.palette.primary["400"],
-											fontSize: "30px",
-											justifyContent: "center",
-										}}
-									>
-										<LogoutIcon />
-									</ListItemIcon>
-									<ListItemText
-									sx={
-										{
-											ml:"30px",
-											whiteSpace: "nowrap",
-										}
-									}>
-										Logout
-									</ListItemText>
-								</ListItemButton>
-							</ListItem>
+				key={"Logout"}
+				disablePadding
+				sx={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					overflowX: "hidden",
+					maxHeight: "80px"
+				}}
+			>
+				<ListItemButton
+					onClick={() => navigate("/logout")}
+					sx={{
+						minHeight: 48,
+						justifyContent: open ? "initial" : "center",
+						px: 2.5,
+						py: 2.5,
+					}}
+				>
+					<ListItemIcon
+						sx={{
+							minWidth: 0,
+							color: theme.palette.primary.dark,
+							fontSize: "30px",
+							justifyContent: "center",
+						}}
+					>
+						<LogoutIcon />
+					</ListItemIcon>
+					<ListItemText
+						sx={
+							{
+								ml: "30px",
+								whiteSpace: "nowrap",	
+							}
+						}>
+						Logout
+					</ListItemText>
+				</ListItemButton>
+			</ListItem>
 		</Box>
 	);
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<Box sx={{ display: "flex", backgroundColor: (theme) => theme.palette.background.paper }}>
 			<CssBaseline />
-			<AppBar 
-				sx={{
-					opacity:0.8,
-					height: "8vh",
-					width: {
-						sm: `calc(100% - ${drawerWidth}px)`,
-						md: `calc(100% - ${drawerWidth}px)`,
-						lg: `calc(100% - ${drawerWidth}px)`,
-					},
-				}}
-			>
-				<Toolbar
-				sx={{
-					display: "flex",
-					justifyContent: "flex-end",
-					alignContent: "center",
-				}}>
-					<IconButton
-						color='inherit'
-						aria-label='open drawer'
-						edge='start'
-						onClick={handleDrawerToggle}
-						sx={{
-							fontSize: "1.8rem",
-							ml: 1,
-							display: { sm: "none" },
-						}}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Avatar>N</Avatar>
-				</Toolbar>
-			</AppBar>
 			<Box
 				component='nav'
 				sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
 				aria-label='mailbox folders'
 			>
 				{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-				<Drawer
-					variant='temporary'
-					open={mobileOpen}
-					onTransitionEnd={handleDrawerTransitionEnd}
-					onClose={handleDrawerClose}
-					sx={{
-						display: { xs: "block", sm: "none" },
-						"& .MuiDrawer-paper": {
-							boxSizing: "border-box",
-							width: drawerWidth,
-						},
-					}}
-					slotProps={{
-						root: {
-							keepMounted: true, // Better open performance on mobile.
-						},
-					}}
-				>
-					{drawer}
-				</Drawer>
+				<Paper sx={{
+					width: "100%",
+					position: 'fixed', bottom: 0, left: 0, right: 0, display: {
+						xs: "block", sm: "none"
+					}
+				}} elevation={3}>
+					<BottomNavigation
+						sx={{
+							width: "100%",
+							minHeight: 48,
+							py: 0,
+							'.MuiBottomNavigationAction-root': {
+								minWidth: 0,
+								maxWidth: 'none',
+								px: 0.5,
+								mx: 0.5,
+							},
+							'.Mui-selected': {
+								fontWeight: 'bold',
+							},
+						}}
+					>
+						<BottomNavItems userType={props.isUser} value={activeIcon} onChange={setActiveIcon} />
+					</BottomNavigation>
+				</Paper>
 				<Drawer
 					variant='permanent'
 					sx={{
@@ -174,9 +147,10 @@ function ResponsiveDrawer(props) {
 							width: {
 								sm: drawerWidth,
 								"&:hover": {
-									transition: "width 0.4s ease-in-out",
+									transition: "width 0.4s ease",
 									width: "20rem",
 								},
+								transition: "width 0.4s ease"
 							},
 						},
 					}}

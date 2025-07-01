@@ -7,7 +7,9 @@ import UserLogin from './components/pages/UserLogin.jsx';
 import RegisterUser from './components/pages/RegisterUser.jsx';
 import RegisterNurse from './components/pages/RegisterNurse.jsx';
 import RegisterCareSeeker from './components/pages/RegisterCareSeeker.jsx';
+import NurseDashboard from './components/pages/NurseDashboard.jsx';
 import IsLoggedIn from '../../backend/util/IsLoggedIn.js';
+import NurseBooking from './components/pages/NurseBooking.jsx';
 
 function AppRoutes() {
     return (
@@ -15,7 +17,9 @@ function AppRoutes() {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route index element={IsLoggedIn() ? <Navigate to="/dashboard" /> : <Home />} />
-                    <Route path="dashboard" element={<UserDashboard />} />
+                    <Route path="/user/dashboard" element={<UserDashboard />} />
+                    <Route path="/nurse/dashboard" element={<NurseDashboard />} />
+                    <Route path="/nurse/booking" element={<NurseBooking />} />
                     <Route path="login" element={<UserLogin />} />
                     <Route path="register" element={<RegisterUser />} />
                     <Route path="register/nurse" element={<RegisterNurse />} />
