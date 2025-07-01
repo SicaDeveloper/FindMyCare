@@ -105,6 +105,23 @@ Located in the `frontend/` directory.
    ```
 4. Open your browser at `http://localhost:5173` (or as indicated in the terminal).
 
+
+### To run both Frontend and Backend
+
+1. Navigate to the parent directory:
+   ```
+   cd FindMyCare
+   ```
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+4. Open your browser at `http://localhost:5173` (or as indicated in the terminal).
+
 ---
 
 ## Contributing
