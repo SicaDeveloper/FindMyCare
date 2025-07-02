@@ -10,6 +10,7 @@ import RegisterCareSeeker from './components/pages/RegisterCareSeeker.jsx';
 import NurseDashboard from './components/pages/NurseDashboard.jsx';
 import IsLoggedIn from '../../backend/util/IsLoggedIn.js';
 import NurseBooking from './components/pages/NurseBooking.jsx';
+import HireANursePage from './components/pages/HireANursePage.jsx';
 
 function AppRoutes() {
     return (
@@ -20,6 +21,7 @@ function AppRoutes() {
                     <Route path="/user/dashboard" element={<UserDashboard />} />
                     <Route path="/nurse/dashboard" element={<NurseDashboard />} />
                     <Route path="/nurse/booking" element={<NurseBooking />} />
+                    <Route path="/user/booking" element={<HireANursePage />} />
                     <Route path="login" element={<UserLogin />} />
                     <Route path="register" element={<RegisterUser />} />
                     <Route path="register/nurse" element={<RegisterNurse />} />
