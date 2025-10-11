@@ -15,6 +15,7 @@ import {
 	ListItemButton,
 } from "@mui/material";
 import theme from "../utils/theme";
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
 const SideBarItems = (props) => {
 	const navigate = useNavigate();
@@ -59,19 +60,25 @@ const SideBarItems = (props) => {
 			path: "/nurse/dashboard",
 		},
 		{
-			id:2,
+			id: 2,
 			icon : <CalendarMonthIcon/>,
 			text: "Bookings",
 			path: "/nurse/booking"
 		},
 		{
 			id: 3,
+			icon: <ChatBubbleIcon />,
+			text: "Messages",
+			path: "/nurse/messages",
+		},
+		{
+			id: 4,
 			icon: <PersonIcon />,
 			text: "Patients",
 			path: "/nurse/patients",
 		},
 		{
-			id: 4,
+			id: 5,
 			icon: <AssessmentIcon />,
 			text: "Reports",
 			path: "/nurse/reports",

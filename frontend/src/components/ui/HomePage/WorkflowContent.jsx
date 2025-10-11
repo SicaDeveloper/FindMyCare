@@ -17,6 +17,8 @@ import {
   Stack
 } from '@mui/material';
 
+import backgroundImage from '../../../media/workflow-background.jpg';
+
 const WorkflowContent = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({
@@ -100,7 +102,7 @@ const WorkflowContent = () => {
     {
       label: 'Personal Information',
       content: (
-        <Stack spacing={3}>
+        <Stack spacing={3} >
           <Typography variant="h6">Patient Information</Typography>
           <TextField
             fullWidth
@@ -272,8 +274,12 @@ const WorkflowContent = () => {
   ];
 
   return (
-      <Container maxWidth="md" sx={{ padding: 2 }}>
-        <Paper elevation={3} sx={{ p: 4 }}>
+      <Box style={{
+        backgroundImage: `url(${backgroundImage})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+      }} fullWidth sx={{ paddingY: 12, margin:0 }} >
+        <Paper elevation={3} sx={{ p: 4, borderRadius: 4, bgcolor: 'background.paper', width: { xs: '90%', md: '55%' }, margin: '0 auto' }}>
           <Typography variant="h4" align="center" gutterBottom>
             Patient Application Form
           </Typography>
@@ -329,7 +335,7 @@ const WorkflowContent = () => {
             )}
           </Box>
         </Paper>
-      </Container>
+      </Box>
   );
 };
 

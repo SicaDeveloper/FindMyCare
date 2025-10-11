@@ -20,11 +20,12 @@ const theme = createTheme({
 			background: {
 				default: "#ffffff",
 				paper: "#f7f7f7",
+				paperBackground: "#e5e4eb",
 				info: "#1f1f1f",
 			},
 			text: {
 				primary: "#333333",
-				secondary: "#6A6B65",
+				secondary: "#939490ff",
 				card: "#f7f7f7",
 				disabled: "#666666",
 			},
@@ -54,8 +55,12 @@ const theme = createTheme({
 				fontFamily: "Lexend Deca",
 				fontSize: "1.5rem",
 			},
+			h7: {
+				fontFamily: "Lexend Deca",
+				fontSize: "1.2rem",
+			},
 			body: {
-				fontFamily: "Open Sans",
+				fontFamily: "Lexend Deca, sans-serif",
 				fontWeightLight: 300,
 				fontWeightRegular: 400,
 				fontWeightMedium: 500,
@@ -63,12 +68,6 @@ const theme = createTheme({
 			},
 			bold: {
 				fontWeight: 700,
-			},
-			fontSize: {
-				xs: "1.2rem",
-				sm: "1.5rem",
-				md: "1.8rem",
-				lg: "2rem",
 			},
 		},
 		overrides: {
@@ -156,7 +155,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 	color: theme.palette.common.white,
 }));
 
-const StyledImage = styled('img')(({ theme }) => ({
+const StyledIconImage = styled('img')(({ theme }) => ({
 	width: '60px',
 	height: '60px',
 	objectFit: 'contain',
@@ -166,5 +165,17 @@ const StyledImage = styled('img')(({ theme }) => ({
 	},
 }));
 
-export { StyledInput, StyledInputLabel, StyledButton, StyledImage };
+const StyledPatientImage = styled('img')(({ theme }) => ({
+	width: '200px',
+	height: '200px',
+	objectFit: 'cover',
+	borderRadius: theme.shape.borderRadius,
+	transition: 'transform 0.3s ease',
+	'&:hover': {
+		transform: 'scale(1.05)',
+	},
+}));	
+
+
+export { StyledInput, StyledInputLabel, StyledButton, StyledIconImage, StyledPatientImage };
 export default theme;

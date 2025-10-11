@@ -10,11 +10,13 @@ import {
 	Stack,
 	Button,
 	Slide,
+	Avatar,
 } from "@mui/material";
 import { useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { styled } from "@mui/material/styles";
+import { current } from "@reduxjs/toolkit";
 
 const defaultReviews = [
 	{
@@ -97,7 +99,7 @@ const ReviewSection = ({ reviews = defaultReviews }) => {
 		<Box
 			sx={{
 				py: 8,
-				backgroundColor: "background.default",
+				backgroundColor: "background.paper",
 			}}
 		>
 			<Container
@@ -111,7 +113,7 @@ const ReviewSection = ({ reviews = defaultReviews }) => {
 				<Typography
 					variant='h4'
 					sx={{
-						textalign: "center",
+						textAlign: "center",
 						mb: 6,
 						color: "text.primary",
 					}}
@@ -134,6 +136,7 @@ const ReviewSection = ({ reviews = defaultReviews }) => {
 							width: "100vw",
 							height: "20rem",
 							overflow: "hidden",
+							backgroundColor: "background.paper",
 						}}
 					>
 						<Slide
@@ -149,37 +152,62 @@ const ReviewSection = ({ reviews = defaultReviews }) => {
 									width: "100%",
 									height: "100%",
 									borderRadius: "1rem",
+									backgroundColor: "background.paper",
+									border: "1px solid #e0e0e0",
 								}}
 							>
 								<CardContent
 									sx={{
 										display: "flex",
 										flexDirection: "column",
-										justifyContent: "center",
-										alignItems: "center",
 										gap: 3,
 										height: "100%",
+										paddingX: 6,
+										paddingY: 5,
+										justifyContent: "space-between",
 									}}
 								>
-									<Typography
-										maxWidth='70%'
-										textAlign='center'
-										variant='h6'
-										color='text.secondary'
+									<Stack
+										direction='row'
+										alignItems='center'
+										gap={2}
 									>
-										{currentReview.content}
+										<Avatar
+											sx={{
+												bgcolor: "primary.main",
+												width: 56,
+												height: 56,
+												fontSize: "1.5rem",
+											}}
+										>
+											{currentReview.userName
+												.split(" ").map((n) => n[0])
+												.join("")
+												.slice(0, 2)}
+										</Avatar>
+										<Stack direction={"column"} alignItems='flex-start'>
+											 <Typography sx={{
+												fontWeight: "bold",
+											 }}>Ethan Miller</Typography>
+											 <Typography sx={{
+												color: "text.primary",
+												fontSize: "0.875rem",
+											 }}>Product Designer</Typography>
+										</Stack>
+									</Stack>
+									<Typography
+										variant='body1'
+										sx={{ flexGrow: 1, color: "text.primary" }}
+									>
+										"{currentReview.content}"
 									</Typography>
-									<Stack spacing={1}>
-										<Rating
-											textAlign='center'
-											fontSize='large'
-											value={currentReview.rating}
-											precision={0.5}
-											readOnly
-										/>
-										<Typography variant='bold' gutterBottom>
-											{currentReview.userName}
-										</Typography>
+									<Stack direction={"row"} alignItems='center' gap={1}>
+										<Rating value={currentReview.rating} readOnly></Rating>
+										<Typography sx={{
+											color: "text.secondary",
+											fontSize: "1.45rem",
+										}}>||</Typography>
+										 <Typography>{currentReview.rating}</Typography>
 									</Stack>
 								</CardContent>
 							</Card>

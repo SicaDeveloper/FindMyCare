@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
+import { Card, CardContent, Typography, Grid2, Box } from '@mui/material';
 
 const stats = [
     { label: 'Patients Today', value: 0 },
@@ -12,9 +12,9 @@ const Statistics = () => (
         <Typography variant="h5" gutterBottom>
             Nurse Dashboard Statistics
         </Typography>
-        <Grid container spacing={2}>
+        <Grid2 container spacing={2}>
             {stats.map((stat) => (
-                <Grid item xs={12} sm={4} key={stat.label}>
+                <Grid2 item xs={12} sm={4} key={stat.label}>
                     <Card>
                         <CardContent>
                             <Typography variant="subtitle1" color="text.secondary" gutterBottom>
@@ -23,9 +23,9 @@ const Statistics = () => (
                             <Typography variant="h4">{stat.value}</Typography>
                         </CardContent>
                     </Card>
-                </Grid>
+                </Grid2>
             ))}
-        </Grid>
+        </Grid2>
     </Box>
 );
 

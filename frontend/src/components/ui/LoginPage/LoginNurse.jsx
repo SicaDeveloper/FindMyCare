@@ -4,61 +4,75 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { StyledInput, StyledInputLabel, StyledButton, StyledImage } from '../../utils/theme';
-import { useOutletContext } from 'react-router-dom';
+import { StyledInput, StyledInputLabel, StyledButton, StyledIconImage } from '../../utils/theme';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import googleIcon from '../../../media/icons8-google-48.png';
 import instagramIcon from '../../../media/icons8-instagram-48-2.png';
 import linkedinIcon from '../../../media/icons8-linkedin-48.png';
 import { useState } from 'react';
 
-function LoginPaper() {
+function LoginNurse() {
 
     const [email, setEmailState] = useState("");
     const [password, setPasswordState] = useState("");
     const setErrorMessage = useOutletContext();
+    const navigate = useNavigate();
 
-    async function sendLoginCredentials(email, password){
+    async function sendLoginCredentials(email, password) {
 
-    const data = {
-        email: email,
-        password: password,
-    };
+        const data = {
+            email: email,
+            password: password,
+        };
 
-    if (!email || !password) {
-        setErrorMessage("Email and password are required");
-        return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        setErrorMessage("Invalid email format");
-        return;
-    }
-    // Validate password length
-    if (password.length < 6) {
-        console.error("Password must be at least 6 characters long");
-        return;
-    }
-    try {
-        const response = await axios.post("http://localhost:3000/login", data, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        if (response.data.login == true) {
-            window.location.href = "/dashboard";
-        } else {
-            setErrorMessage("Login failed:", response.data.message);
-            // Handle login failure (e.g., show an error message)
+        if (!email || !password) {
+            setErrorMessage("Email and password are required");
+            return;
         }
-        // Return the response data if needed
-        console.log("Response from backend:", response.data);
-    } catch (error) {
-        setErrorMessage("Error:", error);
-    }
-};
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setErrorMessage("Invalid email format");
+            return;
+        }
+        // Validate password length
+        if (password.length < 6) {
+            console.error("Password must be at least 6 characters long");
+            return;
+        }
+        try {
+            const response = await axios.post("http://localhost:3000/api/nurse/login", data, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+            
+            // Check if response contains token which indicates successful login
+            if (response.data.token) {
+                // Navigate via router (no full page reload)
+                navigate('/nurse/dashboard', { replace: true });
+            } else {
+                setErrorMessage("Login failed: No authentication token received");
+            }
+            console.log("Response from backend:", response.data);
+        } catch (error) {
+            // Improved error handling
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                setErrorMessage(`Login failed: ${error.response.data.message || 'Unknown error'}`);
+            } else if (error.request) {
+                // The request was made but no response was received
+                setErrorMessage("Login failed: No response from server");
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                setErrorMessage(`Login error: ${error.message}`);
+            }
+        }
+    };
 
     return (
         <Paper
@@ -131,6 +145,14 @@ function LoginPaper() {
                         required
                         sx={{ mb: 4 }} /></Stack>
                 <StyledButton onClick={() => sendLoginCredentials(email, password)}>Sign In</StyledButton>
+                <Typography sx={{
+                    mt: 2,
+                    alignSelf: 'center',
+                    fontFamily: 'Lexend Deca, sans-serif',
+                    color: (theme) => theme.palette.text.secondary,
+                    opacity: 0.8,
+                    fontSize: '0.9rem',
+                }} variant='h6'>Are you a Patient? <Link to="/login/careseeker">Login Here</Link></Typography>
             </Box>
             <hr />
             <Stack sx={{
@@ -138,12 +160,12 @@ function LoginPaper() {
                 px: 2,
                 width: '100%',
             }} direction="row" spacing={6} justifyContent="center">
-                <StyledImage src={googleIcon} alt="Google Icon" />
-                <StyledImage src={instagramIcon} alt="Instagram Icon" />
-                <StyledImage src={linkedinIcon} alt="LinkedIn Icon" />
+                <StyledIconImage src={googleIcon} alt="Google Icon" />
+                <StyledIconImage src={instagramIcon} alt="Instagram Icon" />
+                <StyledIconImage src={linkedinIcon} alt="LinkedIn Icon" />
             </Stack>
         </Paper>
     );
 }
 
-export default LoginPaper;
+export default LoginNurse;

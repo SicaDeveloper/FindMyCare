@@ -4,7 +4,16 @@ import { Card, CardContent, Typography, Button, Box } from '@mui/material';
 const UpcomingBooking = ({ booking, onCancel }) => {
     if (!booking) {
         return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
+            <Box sx={{
+                backgroundColor: "white",
+                maxWidth: 400,
+                borderRadius: 2,
+                padding: 2,
+                boxShadow: 3,
+                margin: 'auto',
+                mt: 4,
+
+            }} display="flex" justifyContent="center" alignItems="center" minHeight={200}>
                 <Typography variant="h6" color="textSecondary">
                     No upcoming bookings.
                 </Typography>
@@ -13,7 +22,7 @@ const UpcomingBooking = ({ booking, onCancel }) => {
     }
 
     return (
-        <Card sx={{ maxWidth: 400, margin: 'auto', mt: 4 }}>
+        <Card sx={{ backgroundColor: "white", maxWidth: 250, margin: 'auto', mt: 4 }}>
             <CardContent>
                 <Typography variant="h6" gutterBottom>
                     Upcoming Booking

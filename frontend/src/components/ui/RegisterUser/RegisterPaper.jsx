@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { StyledInput, StyledInputLabel, StyledButton, StyledImage } from '../../utils/theme';
+import { StyledInput, StyledInputLabel, StyledButton, StyledIconImage } from '../../utils/theme';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import googleIcon from '../../../media/icons8-google-48.png';
@@ -21,74 +21,70 @@ function RegisterPaper() {
     const [email, setEmailState] = useState("");
     const [password, setPasswordState] = useState("");
     const [retypePassword, setRetypePasswordState] = useState("");
-    const setErrorMessage= useOutletContext();
+    const setErrorMessage = useOutletContext();
     const navigate = useNavigate();
 
     async function sendRegisterRequest(email, password, retypePassword, role) {
 
-    // Check if passwords match
-    if (!checkPasswordMatch(password, retypePassword)) {
-        setErrorMessage("Passwords do not match");
-        return;
-    }
-
-    const data = {
-        email: email,
-        password: password,
-        retypePassword: retypePassword,
-        role: role, // 'nurse' or 'careseeker'
-    };
-
-    if (!email || !password) {
-        setErrorMessage("Email and password are required");
-        return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        setErrorMessage("Invalid email format");
-        return;
-    }
-    // Validate password length
-    if (password.length < 6) {
-        setErrorMessage("Password must be at least 6 characters long");
-        return;
-    }
-
-    try {
-        const response = await axios.post("http://localhost:3000/register", data, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (response.data.register == true) {
-            if (response.data.user.role === "nurse") {
-                navigate("/register/nurse",{ state: { email: email, password: password } });
-            } else if (response.data.role === "careseeker") {
-                navigate("/register/careseeker",{ state: { email: email, password: password } });   
-            } else{
-                console.error("Unknown role:", response.data.role);
-            }
-        } else {
-            console.error("Your registration has failed:", response.data.message);
+        // Check if passwords match
+        if (!checkPasswordMatch(password, retypePassword)) {
+            setErrorMessage("Passwords do not match");
+            return;
         }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
 
+        const data = {
+            email: email,
+            password: password,
+            retypePassword: retypePassword,
+            role: role, // 'nurse' or 'careseeker'
+        };
+
+        if (!email || !password) {
+            setErrorMessage("Email and password are required");
+            return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setErrorMessage("Invalid email format");
+            return;
+        }
+        // Validate password length
+        if (password.length < 6) {
+            setErrorMessage("Password must be at least 6 characters long");
+            return;
+        }
+
+        if (role !== "nurse" && role !== "careseeker") {
+            setErrorMessage("Invalid role selected");
+            return;
+        }
+
+        if (role === "nurse") {
+            try {
+                navigate('/register/nurse', { state: { email, password } });
+            } catch (error) {
+                setErrorMessage("Navigation error: " + error.message);
+            }
+        } else if (role === "careseeker") {
+            try {
+                navigate('/register/careseeker', { state: { email, password } });
+            } catch (error) {
+                setErrorMessage("Navigation error: " + error.message);
+            }
+        }
+    }
 
     return (
         <Paper elevation={3}
             sx={{
-                padding: 6,
+                padding: 5,
                 height: {
                     xs: 'max-content',
                     sm: 500,
                     md: 600,
-                    lg: 650,
+                    lg: 700,
                 },
                 width: {
                     xs: '90%',
@@ -99,7 +95,7 @@ function RegisterPaper() {
                 borderRadius: 8,
             }}>
             <Box sx={{
-                height: '80%',
+                height: '85%',
                 display: 'flex',
                 flexDirection: 'column',
             }}>
@@ -124,7 +120,7 @@ function RegisterPaper() {
                         color: (theme) => theme.palette.text.secondary,
                         opacity: 0.8,
                         fontSize: '0.9rem',
-                    }} variant='h6'>Already Have an Account? <Link to="/login">Sign In</Link></Typography>
+                    }} variant='h6'>Already Have an Account? <Link to="/login/careseeker">Sign In</Link></Typography>
                 </Stack>
                 <StyledInputLabel>Enter your Email</StyledInputLabel>
                 <StyledInput
@@ -160,18 +156,18 @@ function RegisterPaper() {
                     mt: 2,
                 }} spacing={2}>
                     <StyledButton onClick={() => sendRegisterRequest(email, password, retypePassword, "nurse")}>Sign Up as a Nurse</StyledButton>
-                    <StyledButton onClick={() => sendRegisterRequest(email, password, retypePassword,"careseeker")}>Sign Up as a Patient</StyledButton>
+                    <StyledButton onClick={() => sendRegisterRequest(email, password, retypePassword, "careseeker")}>Sign Up as a Patient</StyledButton>
                 </Stack>
             </Box>
             <hr />
             <Stack sx={{
-                py: 4,
+                py: 2,
                 px: 2,
                 width: '100%',
             }} direction="row" spacing={6} justifyContent="center">
-                <StyledImage src={googleIcon} alt="Google Icon" />
-                <StyledImage src={instagramIcon} alt="Instagram Icon" />
-                <StyledImage src={linkedinIcon} alt="LinkedIn Icon" />
+                <StyledIconImage src={googleIcon} alt="Google Icon" />
+                <StyledIconImage src={instagramIcon} alt="Instagram Icon" />
+                <StyledIconImage src={linkedinIcon} alt="LinkedIn Icon" />
             </Stack>
         </Paper>
     );

@@ -1,0 +1,83 @@
+{
+  "name": {
+    "type": "string",
+    "description": "Full name of the user"
+  },
+  "email": {
+    "type": "string",
+    "format": "email",
+    "unique": true,
+    "description": "Email address of the user"
+  },
+  "password": {
+    "type": "string",
+    "description": "Hashed password of the user"
+  },
+  "phone": {
+    "type": "string",
+    "description": "Phone number of the user"
+  },
+  "dateOfBirth": {
+    "type": "string",
+    "format": "date"
+  },
+  "gender": {
+    "type": "string",
+    "enum": [
+      "male",
+      "female",
+      "other"
+    ],
+    "description": "Gender of the user"
+  },
+  "blood_group": {
+    "type": "string",
+    "enum": [
+      "A+",
+      "A-",
+      "B+",
+      "B-",
+      "AB+",
+      "AB-",
+      "O+",
+      "O-"
+    ],
+    "description": "Blood group of the user"
+  },
+  "role": {
+    "type": "string",
+    "enum": [
+      "user",
+      "admin"
+    ],
+    "description": "Role of the user in the system"
+  },
+  "medical_history": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "description": "Medical history of the user"
+    }
+  },
+  "appointment": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "description": "Appointment of the user"
+    }
+  },
+  "booking": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "description": "Booking of the user"
+    }
+  },
+  "allergies": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "description": "Allergies of the user"
+    }
+  }
+}

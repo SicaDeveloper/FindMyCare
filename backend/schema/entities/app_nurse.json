@@ -1,13 +1,11 @@
 {
-    "nurse_id": {
-        "$oid": "ObjectId()"
-    },
     "name": {
         "type": "string",
         "required": true
     },
     "email": {
         "type": "string",
+        "format" : "email",
         "required": true,
         "unique": true
     },
@@ -31,29 +29,16 @@
         "type": "string", 
         "required": true
     },
-    "citizenshipNumber": {
-        "type": "string",
-        "required": true
-    },
-    "citizenshipIssuedDate": {
-        "type": "string", 
-        "required": true
-    },
-    "citizenshipFrontPath": {
-        "type": "string",
-        "required": false 
-    },
-    "citizenshipBackPath": {
-        "type": "string",
-        "required": false 
-    },
     "experience": {
         "type": "number",
         "required": true
     },
-    "reviews": {
-        "type": "array",
-        "default": [] 
+    "address": {
+        "type": "string",
+        "required": true
     },
-    "required" : ["name", "email", "password", "phone", "gender", "panNumber", "dateOfBirth", "citizenshipNumber", "citizenshipIssuedDate", "experience"]
+    "rate": {
+        "type": "number",
+        "required": true
+    }
 }

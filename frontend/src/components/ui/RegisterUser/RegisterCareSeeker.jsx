@@ -33,17 +33,17 @@ const CustomButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-function RegisterNurse() {
+function RegisterCareSeeker() {
     const location = useLocation();
     const navigate = useNavigate();
     const { email: initialEmail, password: initialPassword } = location.state || {};
-    const setErrorMessage= useOutletContext();
+    const setErrorMessage = useOutletContext();
 
 
     const [formData, setFormData] = useState({
         fullName: '',
-        panNumber: '',
-        gender: '',
+        bloodGroup: 'A+',
+        gender: 'male',
         phone: '',
         dateOfBirth: '',
         citizenshipNumber: '',
@@ -84,17 +84,17 @@ function RegisterNurse() {
     };
 
     const handleAvatarChange = (event) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         const file = event.target.files[0];
 
-        if (file && file.type.startsWith('image/')){
+        if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setAvatarImage(reader.result)
             };
 
             reader.readAsDataURL(file);
-        } else{
+        } else {
             setAvatarImage(null);
             setErrorMessage("Invalid Image Input");
         }
@@ -159,7 +159,7 @@ function RegisterNurse() {
     const validate = () => {
         let tempErrors = {};
         if (!formData.fullName.trim()) tempErrors.fullName = "Full Name is required";
-        if (!formData.panNumber.trim()) tempErrors.panNumber = "PAN Number is required";
+        if (!formData.bloodGroup.trim()) tempErrors.bloodGroup = "Blood Group is required";
         if (!formData.gender) tempErrors.gender = "Gender is required";
         if (!formData.phone.trim()) tempErrors.phone = "Phone Number is required";
         else if (!/^\d{10}$/.test(formData.phone)) tempErrors.phone = "Phone number must be 10 digits";
@@ -177,7 +177,7 @@ function RegisterNurse() {
         return Object.keys(tempErrors).length === 0;
     };
 
-    const handleNurseRegistration = async (event) => {
+    const handleCareSeekerRegistration = async (event) => {
         event.preventDefault();
         setSubmitError('');
         if (!validate()) {
@@ -186,7 +186,7 @@ function RegisterNurse() {
 
         const submissionData = new FormData();
         submissionData.append('name', formData.fullName);
-        submissionData.append('panNumber', formData.panNumber);
+        submissionData.append('bloodGroup', formData.bloodGroup);
         submissionData.append('gender', formData.gender);
         submissionData.append('phone', formData.phone);
         submissionData.append('dateOfBirth', formData.dateOfBirth);
@@ -208,7 +208,7 @@ function RegisterNurse() {
         }
 
         try {
-            const response = await fetch('/api/register/nurse', {
+            const response = await fetch('/api/register/careseeker', {
                 method: 'POST',
                 body: submissionData,
             });
@@ -218,8 +218,10 @@ function RegisterNurse() {
             if (response.ok) {
                 console.log("Registration successful:", responseData);
                 if (responseData.token) localStorage.setItem('token', responseData.token);
-                if (responseData.nurse) localStorage.setItem('user', JSON.stringify(responseData.nurse));
-                navigate('/nurse-dashboard');
+                if (responseData.careseeker) localStorage.setItem('user', JSON.stringify(responseData.careseeker));
+                else if (responseData.user) localStorage.setItem('user', JSON.stringify(responseData.user));
+                else if (responseData.nurse) localStorage.setItem('user', JSON.stringify(responseData.nurse));
+                navigate('/careseeker-dashboard');
             } else {
                 setSubmitError(responseData.message || 'Registration failed. Please try again.');
             }
@@ -255,7 +257,7 @@ function RegisterNurse() {
             </Stack>
             <Paper elevation={3}
                 component="form" // Make Paper a form
-                onSubmit={handleNurseRegistration}
+                onSubmit={handleCareSeekerRegistration}
                 sx={{
                     backgroundColor: (theme) => theme.palette.background.paper,
                     mx: 'auto', // Center paper
@@ -282,16 +284,16 @@ function RegisterNurse() {
                             md: 2,
                             lg: 2
                         },
-                        fontWeight:700,
+                        fontWeight: 700,
                         color: (theme) => theme.palette.primary.dark
-                        
+
                     }
                 } variant="h5" component="h1" textAlign="center" gutterBottom>
-                    Register As a Nurse
+                    Enter Your Personal Details
                 </Typography>
 
                 {/* Personal Details Section */}
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: '100%' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, py: 2, width: '100%' }}>
                     <Stack direction={{
                         xs: 'column',
                         sm: 'column',
@@ -303,14 +305,14 @@ function RegisterNurse() {
                             sm: 'wrap',
                             md: 'nowrap',
                         },
-                        gap: 2
+                        gap: 10
                     }} spacing={2} alignItems="center">
                         <Stack sx={{
-                            gap:4,
-                            justifyContent:'center',
-                            alignItems:'center'
+                            gap: 4,
+                            justifyContent: 'center',
+                            alignItems: 'center'
                         }}>
-                            <Avatar src={avatarImage} sx={{ width: 160, height: 160, mb: 1 }} /> 
+                            <Avatar src={avatarImage} sx={{ width: 160, height: 160, mb: 1 }} />
                             <Input
                                 id="avatarImage"
                                 type="file"
@@ -318,7 +320,7 @@ function RegisterNurse() {
                                 accept="image/*"
                                 onChange={handleAvatarChange}
                                 sx={{
-                                    width:250
+                                    width: 250
                                 }}></Input>
                         </Stack>
                         <Stack sx={{
@@ -336,14 +338,28 @@ function RegisterNurse() {
                                     {errors.fullName && <FormHelperText error>{errors.fullName}</FormHelperText>}
                                 </FormGroup>
                                 <FormGroup sx={{ flexGrow: 1, minWidth: '200px' }}>
-                                    <InputLabel htmlFor="panNumber">PAN Number</InputLabel>
-                                    <Input width={{
-                                        xs: '50%',
-                                        sm: '50%',
-                                        md: '60%%',
-                                        lg: '70%',
-                                    }} id="panNumber" name="panNumber" value={formData.panNumber} onChange={handleChange} error={!!errors.panNumber} />
-                                    {errors.panNumber && <FormHelperText error>{errors.panNumber}</FormHelperText>}
+                                    <InputLabel id="bloodgroup-input-label">Blood Group</InputLabel>
+                                    <Select
+                                        size='small'
+                                        labelId='bloodgroup-input-label'
+                                        id='bloodgroup-select'
+                                        name="bloodGroup"
+                                        value={formData.bloodGroup}
+                                        onChange={handleChange}
+                                        label='Blood Group'
+                                        error={!!errors.bloodGroup}
+                                        fullWidth
+                                    >
+                                        <MenuItem value={"A+"}>A+</MenuItem>
+                                        <MenuItem value={"A-"}>A-</MenuItem>
+                                        <MenuItem value={"B+"}>B+</MenuItem>
+                                        <MenuItem value={"B-"}>B-</MenuItem>
+                                        <MenuItem value={"O+"}>O+</MenuItem>
+                                        <MenuItem value={"O-"}>O-</MenuItem>
+                                        <MenuItem value={"AB+"}>AB+</MenuItem>
+                                        <MenuItem value={"AB-"}>AB-</MenuItem>
+                                    </Select>
+                                    {errors.bloodGroup && <FormHelperText error>{errors.bloodGroup}</FormHelperText>}
                                 </FormGroup>
                             </Stack>
                             <Stack flexWrap={{
@@ -361,7 +377,7 @@ function RegisterNurse() {
                                     }} id="phone" name="phone" value={formData.phone} onChange={handleChange} error={!!errors.phone} />
                                     {errors.phone && <FormHelperText error>{errors.phone}</FormHelperText>}
                                 </FormGroup>
-                                <FormGroup sx={{ flexGrow: 1, minWidth: '150px' }}>
+                                <FormGroup sx={{ flexGrow: 1, minWidth: '200px' }}>
                                     <InputLabel id="gender-input-label">Gender</InputLabel>
                                     <Select
                                         size='small'
@@ -380,6 +396,8 @@ function RegisterNurse() {
                                     </Select>
                                     {errors.gender && <FormHelperText error>{errors.gender}</FormHelperText>}
                                 </FormGroup>
+                            </Stack>
+                            <Stack>
                                 <FormGroup sx={{ flexGrow: 1, minWidth: '200px' }}>
                                     <InputLabel htmlFor="dateOfBirth" shrink>Date of Birth</InputLabel>
                                     {/* Using TextField for better date input experience and label handling */}
@@ -390,9 +408,8 @@ function RegisterNurse() {
                                         value={formData.dateOfBirth}
                                         onChange={handleChange}
                                         error={!!errors.dateOfBirth}
-                                        fullWidth
-                                        InputLabelProps={{ shrink: true }} // Ensures label is always shrunk for date type
-                                        variant="standard" // To look similar to Input, or use "outlined" / "filled"
+                                        fullWidth // Ensures label is always shrunk for date type
+                                        variant="outlined" // To look similar to Input, or use "outlined" / "filled"
                                     />
                                     {errors.dateOfBirth && <FormHelperText error>{errors.dateOfBirth}</FormHelperText>}
                                 </FormGroup>
@@ -453,7 +470,7 @@ function RegisterNurse() {
                     </FormGroup>
                     <FormGroup sx={{ width: { xs: '90%', sm: '70%', md: '60%' } }}>
                         <InputLabel htmlFor="citizenshipBack">Citizenship Back Photo</InputLabel>
-                                                {
+                        {
                             citizenshipBack && (<PreviewImage src={citizenshipBack} alt="Citizenship Back" />)
                         }
                         <Input
@@ -479,8 +496,10 @@ function RegisterNurse() {
                         {errors.email || errors.password} {/* Display email/password error if present */}
                     </Typography>
                 }
-                <Button type="submit" variant="contained" color="primary" sx={{ mt: 2,
-                    backgroundColor: (theme) => theme.palette.primary.dark, py: 1.5, width: { xs: '80%', sm: '60%', md: '50%' }, alignSelf: 'center' }}>
+                <Button type="submit" variant="contained" color="primary" sx={{
+                    mt: 2,
+                    backgroundColor: (theme) => theme.palette.primary.dark, py: 1.5, width: { xs: '80%', sm: '60%', md: '50%' }, alignSelf: 'center'
+                }}>
                     Submit Registration
                 </Button>
             </Paper>
@@ -488,4 +507,4 @@ function RegisterNurse() {
     );
 }
 
-export default RegisterNurse;
+export default RegisterCareSeeker;

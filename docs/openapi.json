@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FindMyCare API",
+    "version": "1.0.0",
+    "description": "API documentation for FindMyCare backend (Scalar)"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local"
+    }
+  ],
+  "paths": {
+    "/nurse/register": {
+      "post": {
+        "tags": [
+          "Nurse"
+        ],
+        "summary": "Register a new nurse",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password",
+                  "phone",
+                  "gender",
+                  "panNumber",
+                  "dateOfBirth",
+                  "citizenship",
+                  "experience"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Jane Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "jane@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "P@ssw0rd!"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+1-555-123-4567"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "example": "female"
+                  },
+                  "panNumber": {
+                    "type": "string",
+                    "example": "ABCDE1234F"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "1990-05-20"
+                  },
+                  "citizenship": {
+                    "type": "object",
+                    "required": [
+                      "number",
+                      "issuedDate"
+                    ],
+                    "properties": {
+                      "number": {
+                        "type": "string",
+                        "example": "01-01-00012345"
+                      },
+                      "issuedDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2010-01-31"
+                      },
+                      "frontPath": {
+                        "type": "string",
+                        "description": "Base64 or URL to front image"
+                      },
+                      "backPath": {
+                        "type": "string",
+                        "description": "Base64 or URL to back image"
+                      }
+                    }
+                  },
+                  "experience": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 5
+                  },
+                  "reviews": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registered"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

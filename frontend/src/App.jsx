@@ -12,11 +12,11 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {errorMessage && <ErrorPopup errorMessage={errorMessage} onClose={() => setErrorMessage("")} />}
-      <Outlet context={setErrorMessage} />
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {errorMessage && <ErrorPopup errorMessage={errorMessage} onClose={() => setErrorMessage("")} />}
+        <Outlet context={setErrorMessage} />
+      </ThemeProvider>
   )
 }
 

@@ -63,7 +63,7 @@ function Navbar() {
     >
       <LogoButton />
       {mediaQuery(smallDevice)}
-      <StyledLink to="/login">Login</StyledLink>
+      <StyledLink to="/login/careseeker">Login</StyledLink>
     </AppBar>
   );
 }

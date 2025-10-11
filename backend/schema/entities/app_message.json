@@ -1,0 +1,23 @@
+{
+    "conversation_id": {
+        "type": "string",
+        "description": "ID of the conversation the message belongs to"
+    },
+    "sender_id": {
+        "type": "string",
+        "description": "ID of the user sending the message"
+    },
+    "receiver_id": {
+        "type": "string",
+        "description": "ID of the user receiving the message"
+    },
+    "content": {
+        "type": "string",
+        "description": "Content of the message"
+    },
+    "timestamp": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the message was sent"
+    }
+}

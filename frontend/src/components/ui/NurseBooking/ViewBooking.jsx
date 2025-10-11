@@ -1,31 +1,14 @@
 import React from 'react';
-import { Box, Paper, Typography, Button } from '@mui/material';
+import { Box, Paper, Typography, Button, Input, Stack } from '@mui/material';
+import BookingRequest from './BookingRequest';
 
-const ViewBooking = () => {
+function ViewBooking() {
     return (
-        <Box sx={{ p: 3 }}>
-            <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h5" gutterBottom>
-                    Booking Details
-                </Typography>
-                {/* Replace with actual booking details */}
-                <Typography variant="body1">
-                    Patient Name: John Doe
-                </Typography>
-                <Typography variant="body1">
-                    Date: 2024-06-10
-                </Typography>
-                <Typography variant="body1">
-                    Time: 10:00 AM
-                </Typography>
-                <Box sx={{ mt: 3 }}>
-                    <Button variant="contained" color="primary">
-                        Confirm Booking
-                    </Button>
-                </Box>
-            </Paper>
-        </Box>
+        <>
+        <Typography color='white' variant="h2">View Bookings</Typography>
+        <BookingRequest></BookingRequest>
+        </>
     );
-};
+}
 
 export default ViewBooking;

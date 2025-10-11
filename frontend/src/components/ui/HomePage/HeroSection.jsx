@@ -9,7 +9,7 @@ const HeroSection = () => {
 	return (
 		<Box
 			sx={{			
-				height: "90svh",
+				height: "92svh",
 			}}
 		>
 			<video className="hero-section-video" autoPlay src={video} loop muted></video>

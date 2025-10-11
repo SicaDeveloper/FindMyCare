@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && nodemon server.js\"",
+    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && nodemon server.js\" \"cd backend && npm run build-openapi\" ",
     "frontend": "cd frontend && npm run dev",
-    "backend": "cd backend && nodemon server.js"
+    "backend": "cd backend && nodemon server.js",
+    "build-openapi": "node ./backend/modules/build-openapi.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.6",
     "@mui/x-date-pickers": "^7.27.1",
+    "@scalar/express-api-reference": "^0.4.156",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
@@ -25,7 +27,9 @@
     "mongoose": "^8.16.0",
     "openai": "^4.85.4",
     "pkg.json": "^2.0.9",
+    "simple-oauth2": "^5.1.0",
     "socket.io": "^4.8.1",
+    "swagger-jsdoc": "^6.2.8",
     "vite": "^6.2.0"
   },
   "devDependencies": {

@@ -1,14 +1,7 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "properties": {
-    "id": {
+    "nurse_id": {
       "type": "string",
-      "description": "Unique identifier for the review"
-    },
-    "app_id": {
-      "type": "string",
-      "description": "ID of the app being reviewed"
+      "description": "ID of the nurse being reviewed"
     },
     "user_id": {
       "type": "string",
@@ -47,14 +40,4 @@
       "type": "string",
       "description": "Version of the app when the review was written"
     }
-  },
-  "required": [
-    "id",
-    "app_id",
-    "user_id",
-    "rating",
-    "review_text",
-    "created_at"
-  ],
-  "additionalProperties": false
 }

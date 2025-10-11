@@ -80,7 +80,7 @@ function Calender() {
     const monthName = new Date(currentYear, currentMonth).toLocaleString("default", { month: "long" });
 
     return (
-        <Paper elevation={3} sx={{ maxWidth: 350, margin: "0 auto", p: 2 }}>
+        <Paper elevation={3} sx={{ maxWidth: 350, mx:8, p: 4 }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <IconButton onClick={prevMonth} size="small">
                     <ArrowBackIos fontSize="small" />

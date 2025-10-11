@@ -12,7 +12,7 @@ const UserDashboard = () => {
 	return (
 		<>
 			<Sidebar isUser='User' />
-			<Container
+			<Grid container spacing={2}
 				sx={{
 					my: 12,
 					mx: 12,
@@ -22,12 +22,14 @@ const UserDashboard = () => {
 					gap: 5,
 				}}
 			>
-				<Box sx={{ display: "flex", gap: 5, width: "100%", justifyContent: "space-between" }}>
+				<Grid size={6}>
 					<Calender />
+				</Grid>
+				<Grid size={3}>
 					<Medication />
-				</Box>
-				<Appointments />
-			</Container>
+					<Appointments />
+				</Grid>
+			</Grid>
 		</>
 	);
 };

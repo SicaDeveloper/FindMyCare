@@ -2,30 +2,46 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import App from './App.jsx';
 import Home from './components/pages/Home.jsx';
+import ProtectedRoute from './components/utils/ProtectedRoutes.jsx';
 import UserDashboard from './components/pages/UserDashboard.jsx';
 import UserLogin from './components/pages/UserLogin.jsx';
 import RegisterUser from './components/pages/RegisterUser.jsx';
-import RegisterNurse from './components/pages/RegisterNurse.jsx';
-import RegisterCareSeeker from './components/pages/RegisterCareSeeker.jsx';
+import RegisterNurse from './components/ui/RegisterUser/RegisterNurse.jsx';
+import RegisterCareSeeker from './components/ui/RegisterUser/RegisterCareSeeker.jsx';
 import NurseDashboard from './components/pages/NurseDashboard.jsx';
-import IsLoggedIn from '../../backend/util/IsLoggedIn.js';
 import NurseBooking from './components/pages/NurseBooking.jsx';
 import HireANursePage from './components/pages/HireANursePage.jsx';
+import Logout from './components/utils/Logout.jsx';
 
 function AppRoutes() {
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<App />}>
-                    <Route index element={IsLoggedIn() ? <Navigate to="/dashboard" /> : <Home />} />
+                    <Route index element={<Home />} />
+
+                    {/* CareSeeker Routes */}
                     <Route path="/user/dashboard" element={<UserDashboard />} />
-                    <Route path="/nurse/dashboard" element={<NurseDashboard />} />
-                    <Route path="/nurse/booking" element={<NurseBooking />} />
                     <Route path="/user/booking" element={<HireANursePage />} />
-                    <Route path="login" element={<UserLogin />} />
-                    <Route path="register" element={<RegisterUser />} />
-                    <Route path="register/nurse" element={<RegisterNurse />} />
-                    <Route path="register/careseeker" element={<RegisterCareSeeker />} />
+
+                    {/* Nurse Routes */}
+                    <Route path="/nurse/dashboard" element={
+                        <ProtectedRoute requiredRole="nurse">
+                            <NurseDashboard />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/nurse/booking" element={<NurseBooking />} />
+
+                    {/* Authentication Routes */}
+                    <Route path="/login/careseeker" element={<UserLogin />} />
+                    <Route path="/login/nurse" element={<UserLogin />} />
+                    {/* Registration Routes */}
+                    <Route path="/register" element={<RegisterUser />} />
+                    <Route path="/register/nurse" element={<RegisterNurse />} />
+                    <Route path="/register/careseeker" element={<RegisterCareSeeker />} />
+
+                    <Route path="/logout" element={<Logout />} />
+                    {/* Fallback Route */}
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>
             </Routes>

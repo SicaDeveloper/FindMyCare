@@ -1,0 +1,54 @@
+{
+    "patientId": {
+        "type": "string",
+        "description": "Reference to the patient"
+    },
+    "nurseId": {
+        "type": "string",
+        "description": "Reference to the nurse"
+    },
+    "status": {
+        "type": "string",
+        "enum": ["pending", "confirmed", "completed", "cancelled"],
+        "description": "Current status of the booking"
+    },
+    "type": {
+        "type": "string",
+        "enum": ["single", "follow-up", "emergency", "routine-checkup", "recurring"],
+        "description": "Type of booking"
+    },
+    "notes": {
+        "type": "string",
+        "description": "Additional notes about the booking"
+    },
+    "startDate": {
+        "type": "string",
+        "format" : "date-time",
+        "description": "Start date and time of the booking"
+    },
+    "endDate": {
+        "type": "string",
+        "format" : "date-time",
+        "description": "End date and time of the booking"
+    },
+    "createdAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the booking was created"
+    },
+    "updatedAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the booking was last updated"
+    },
+    "fee": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Service fee amount"
+    },
+    "paymentStatus": {
+        "type": "string",
+        "enum": ["pending", "paid", "failed"],
+        "description": "Payment status of the booking"
+    }
+}

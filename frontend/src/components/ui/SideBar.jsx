@@ -144,14 +144,7 @@ function ResponsiveDrawer(props) {
 						display: { xs: "none", sm: "block" },
 						"& .MuiDrawer-paper": {
 							boxSizing: "border-box",
-							width: {
-								sm: drawerWidth,
-								"&:hover": {
-									transition: "width 0.4s ease",
-									width: "20rem",
-								},
-								transition: "width 0.4s ease"
-							},
+							width: drawerWidth,
 						},
 					}}
 					open

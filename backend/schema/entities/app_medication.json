@@ -1,0 +1,94 @@
+{
+    "name": {
+        "type": "string",
+        "description": "Name of the medication"
+    },
+    "brand": {
+        "type": "string",
+        "description": "Brand name of the medication"
+    },
+    "dosage": {
+        "type": "string",
+        "description": "Dosage strength and form"
+    },
+    "frequency": {
+        "type": "string",
+        "description": "How often to take the medication"
+    },
+    "route": {
+        "type": "string",
+        "enum": [
+            "oral",
+            "topical",
+            "intravenous",
+            "intramuscular",
+            "subcutaneous",
+            "inhalation"
+        ],
+        "description": "Administration route"
+    },
+    "quantity": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Quantity prescribed"
+    },
+    "unit": {
+        "type": "string",
+        "description": "Unit of measurement for quantity"
+    },
+    "refills": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "Number of refills allowed"
+    },
+    "patientId": {
+        "type": "string",
+        "description": "Reference to the patient"
+    },
+    "doctorId": {
+        "type": "string",
+        "description": "Reference to the prescribing doctor"
+    },
+    "startDate": {
+        "type": "string",
+        "format": "date",
+        "description": "Date when medication should be started"
+    },
+    "endDate": {
+        "type": "string",
+        "format": "date",
+        "description": "Date when medication should be completed"
+    },
+    "status": {
+        "type": "string",
+        "enum": [
+            "active",
+            "completed",
+            "discontinued",
+            "cancelled"
+        ],
+        "description": "Current status of the medication"
+    },
+    "instructions": {
+        "type": "string",
+        "description": "Special instructions for taking the medication"
+    },
+    "sideEffects": {
+        "type": "string",
+        "description": "Reported side effects"
+    },
+    "contraindications": {
+        "type": "string",
+        "description": "Any contraindications noted"
+    },
+    "createdAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the medication was prescribed"
+    },
+    "updatedAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the medication was last updated"
+    }
+}

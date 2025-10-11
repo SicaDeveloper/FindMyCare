@@ -1,11 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "properties": {
-    "id": {
-      "type": "string",
-      "description": "Unique identifier for the appointment"
-    },
     "patientId": {
       "type": "string",
       "description": "Reference to the patient"
@@ -34,8 +27,9 @@
       "description": "Additional notes about the appointment"
     },
     "duration": {
-      "type": "integer",
+      "type": "number",
       "minimum": 0,
+      "required": true,
       "description": "Duration of appointment in minutes"
     },
     "createdAt": {
@@ -48,15 +42,4 @@
       "format": "date-time",
       "description": "Timestamp when the appointment was last updated"
     }
-  },
-  "required": [
-    "id",
-    "patientId",
-    "doctorId",
-    "dateTime",
-    "status",
-    "type",
-    "duration"
-  ],
-  "additionalProperties": false
 }

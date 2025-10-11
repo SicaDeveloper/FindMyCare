@@ -1,0 +1,18 @@
+{
+    "number": {
+        "type": "string",
+        "required": true
+    },
+    "issuedDate": {
+        "type": "string",
+        "required": true
+    },
+    "frontPath": {
+        "type": "string",
+        "required": true
+    },
+    "backPath": {
+        "type": "string",
+        "required": true
+    }
+}

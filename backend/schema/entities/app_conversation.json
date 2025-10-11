@@ -1,0 +1,20 @@
+{
+    "participants": {
+        "type": "array",
+        "description": "Array of User IDs participating in this conversation",
+        "items": {
+            "type": "string",
+            "format": "ObjectId"
+        }
+    },
+    "createdAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the conversation was created"
+    },
+    "updatedAt": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Timestamp when the conversation was last updated"
+    }
+}
