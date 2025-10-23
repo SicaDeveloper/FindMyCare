@@ -197,7 +197,7 @@ function RegisterNurse() {
         submissionData.append('citizenshipIssuedDate', formData.citizenshipIssuedDate);
         submissionData.append('email', formData.email);
         submissionData.append('password', formData.password);
-        submissionData.append('experience', String(Number(formData.experience)));
+        submissionData.append('experience', formData.experience.toString());
 
 
         if (citizenshipFront) {

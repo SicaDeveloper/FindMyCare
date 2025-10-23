@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
+import ToggleButton from '@mui/material/ToggleButton';
 
 
 const theme = createTheme({
@@ -176,6 +177,34 @@ const StyledPatientImage = styled('img')(({ theme }) => ({
 	},
 }));	
 
+const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
+	// Common styles for all buttons (e.g., matching your StyledButton)
+	textTransform: 'none',
+	borderRadius: 8,
+	fontFamily: 'Lexend Deca, sans-serif',
+	
+	// Style when the button is NOT selected
+   color: theme.palette.text.primary,
+	
+	// 👇 The crucial part: Style when the button IS selected
+	'&.Mui-selected': {
+		backgroundColor: theme.palette.common.white, // Primary color for the background
+		color: theme.palette.primary.dark, // White text
+		
+		// Ensure selected style persists on hover
+		'&:hover': {
+			backgroundColor: theme.palette.primary.dark,
+			color: theme.palette.common.white, // A slightly darker primary on hover
+		},
+	},
+	
+	// Style on hover when NOT selected
+	'&:hover': {
+		backgroundColor: theme.palette.action.hover,
+		color: theme.palette.text.primary,
+	},
+}));
 
-export { StyledInput, StyledInputLabel, StyledButton, StyledIconImage, StyledPatientImage };
+
+export { StyledInput, StyledInputLabel, StyledToggleButton, StyledButton, StyledIconImage, StyledPatientImage };
 export default theme;

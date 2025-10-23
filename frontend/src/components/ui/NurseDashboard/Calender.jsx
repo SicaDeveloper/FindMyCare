@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
     Box,
-    Button,
+    Stack,
     IconButton,
     Table,
     TableBody,
@@ -23,6 +23,9 @@ function Calender() {
     const today = new Date();
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
     const [currentYear, setCurrentYear] = useState(today.getFullYear());
+    const [currentHour, setCurrentHour] = useState(today.getHours());
+    const [currentMinute, setCurrentMinute] = useState(today.getMinutes() ? today.getMinutes().toString().padStart(2, '0') : '00');
+    
 
     const daysInMonth = getDaysInMonth(currentYear, currentMonth);
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -59,9 +62,8 @@ function Calender() {
             <TableCell
                 key={d}
                 sx={{
-                    padding: "8px",
+                    padding: "16px",
                     backgroundColor: isToday ? "#e0f7fa" : "white",
-                    borderRadius: "4px",
                     cursor: "pointer",
                     textAlign: "center",
                 }}
@@ -80,7 +82,22 @@ function Calender() {
     const monthName = new Date(currentYear, currentMonth).toLocaleString("default", { month: "long" });
 
     return (
-        <Paper elevation={3} sx={{ maxWidth: 350, mx:8, p: 4 }}>
+        <Paper elevation={2} sx={{ maxWidth: 400, mx: 4, p: 2, bgcolor: (theme) => theme.palette.background.default, borderRadius: 5 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2} px={1}>
+                <Stack direction="column">
+                    <Typography variant="h6">Bookings</Typography>
+                    <Typography variant="body">10 mins to next shift</Typography>
+                </Stack>
+                <Box sx={{
+                    backgroundColor: (theme) => theme.palette.background.paper,
+                    padding: 1,
+                    border: "1px solid lightgrey",
+                    borderRadius: 2,
+                    color: (theme) => theme.palette.primary.text,
+                }}>
+                    <Typography variant="h5">{currentHour}:{currentMinute}</Typography>
+                </Box>
+            </Stack>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <IconButton onClick={prevMonth} size="small">
                     <ArrowBackIos fontSize="small" />
@@ -92,18 +109,27 @@ function Calender() {
                     <ArrowForwardIos fontSize="small" />
                 </IconButton>
             </Box>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        {daysOfWeek.map((day) => (
-                            <TableCell key={day} sx={{ padding: "6px", color: "#00796b", textAlign: "center" }}>
-                                {day}
-                            </TableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>{rows}</TableBody>
-            </Table>
+            <Paper sx={{ p: 2, border:"1px solid grey 0.1", borderRadius: 10, backgroundColor: "#ffffff" }}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            {daysOfWeek.map((day) => (
+                                <TableCell key={day} sx={{ padding: "8px", color: "#00796b", textAlign: "center" }}>
+                                    {day}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody sx={{
+                        '& .MuiTableCell-root': {
+                            borderBottom: 'none'
+                        },
+                        '& .MuiTableRow-root': {
+                            borderBottom: 'none'
+                        }
+                    }}>{rows}</TableBody>
+                </Table>
+            </Paper>
         </Paper>
     );
 }

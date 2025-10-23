@@ -1,18 +1,15 @@
 
-import {
-	Box,
-	Container,
-} from "@mui/material";
 import Sidebar from "../ui/SideBar";
 import Appointments from "../ui/UserDashboard/Appointments";
 import Calender from "../ui/UserDashboard/Calender";
 import Medication from "../ui/UserDashboard/Medication";
+import { Grid2 } from "@mui/material";
 
 const UserDashboard = () => {
 	return (
 		<>
 			<Sidebar isUser='User' />
-			<Grid container spacing={2}
+			<Grid2 container spacing={2}
 				sx={{
 					my: 12,
 					mx: 12,
@@ -22,14 +19,14 @@ const UserDashboard = () => {
 					gap: 5,
 				}}
 			>
-				<Grid size={6}>
+				<Grid2 size={6}>
 					<Calender />
-				</Grid>
-				<Grid size={3}>
+				</Grid2>
+				<Grid2 size={3}>
 					<Medication />
 					<Appointments />
-				</Grid>
-			</Grid>
+				</Grid2>
+			</Grid2>
 		</>
 	);
 };

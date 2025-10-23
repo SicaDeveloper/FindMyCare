@@ -1,5 +1,14 @@
 const nodemailer = require('nodemailer');
 
+nodemailer.createTestAccount((err, account) => {
+    
+    
+    if (err) {
+        console.error('Failed to create a testing account. ' + err.message);
+        return;
+    }
+});
+
 const sendVerifyMail = async (to, subject, text) => {
     try {
         const transporter = nodemailer.createTransport({

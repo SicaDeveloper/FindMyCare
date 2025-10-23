@@ -11,6 +11,9 @@ import RegisterCareSeeker from './components/ui/RegisterUser/RegisterCareSeeker.
 import NurseDashboard from './components/pages/NurseDashboard.jsx';
 import NurseBooking from './components/pages/NurseBooking.jsx';
 import HireANursePage from './components/pages/HireANursePage.jsx';
+import MessagePage from './components/pages/MessagePage.jsx';
+import PatientPage from './components/pages/PatientPage.jsx';
+import ReportPage from './components/pages/ReportPage.jsx';
 import Logout from './components/utils/Logout.jsx';
 
 function AppRoutes() {
@@ -39,7 +42,21 @@ function AppRoutes() {
                     <Route path="/register" element={<RegisterUser />} />
                     <Route path="/register/nurse" element={<RegisterNurse />} />
                     <Route path="/register/careseeker" element={<RegisterCareSeeker />} />
-
+                    <Route path="/nurse/messages" element={
+                        <ProtectedRoute requiredRole="nurse">
+                            <MessagePage />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/nurse/patients" element={
+                        <ProtectedRoute requiredRole="nurse">
+                            <PatientPage />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/nurse/reports" element={
+                        <ProtectedRoute requiredRole="nurse">
+                            <ReportPage />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/logout" element={<Logout />} />
                     {/* Fallback Route */}
                     <Route path="*" element={<Navigate to="/" replace />} />

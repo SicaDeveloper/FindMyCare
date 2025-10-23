@@ -10,6 +10,7 @@ import Calender from '../ui/NurseDashboard/Calender';
 import Patient from '../ui/NurseDashboard/Patient';
 import Events from '../ui/NurseDashboard/Events';
 import Statistics from '../ui/NurseDashboard/Statistics';
+import Appointments from '../ui/UserDashboard/Appointments';
 
 const NurseDashboard = () => {
 	return (
@@ -24,14 +25,34 @@ const NurseDashboard = () => {
 			<Paper sx={{
 				backgroundColor: (theme) => theme.palette.background.paper,
 				padding: 4,
-				marginLeft: 8,
+				marginLeft: {
+					xs: 0,
+					sm: 6,
+					md: 8,
+					lg: 10,
+				},
 
 			}}>
-				<Grid2 container spacing={2}>
-					<Statistics></Statistics>
-					<Calender></Calender>
-					<Patient></Patient>
-					<Events></Events>
+				<Grid2 container direction={"column"} spacing={2}>
+					<Grid2 container xs={12} md={8} lg={8}>
+							<Grid2 xs={12} md={8} lg={8} mb={2}>
+								<Statistics />
+							</Grid2>
+							<Grid2 xs={12} md={8} lg={8} mb={2}>
+								<Calender />
+							</Grid2>
+					</Grid2>
+					<Grid2 container xs={12} md={4} lg={3}>
+						<Grid2 xs={12} md={4} lg={4} mb={2}>
+							<Events />
+						</Grid2>
+						<Grid2 xs={12} md={4} lg={4} mb={2}>
+							<Patient />
+						</Grid2>
+						<Grid2 xs={12} md={4} lg={4} mb={2}>
+							<Appointments />
+						</Grid2>
+					</Grid2>
 				</Grid2>
 			</Paper>
 		</Box>
