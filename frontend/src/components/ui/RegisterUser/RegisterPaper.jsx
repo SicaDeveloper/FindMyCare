@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { StyledInput, StyledInputLabel, StyledButton, StyledIconImage } from '../../utils/theme';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import googleIcon from '../../../media/icons8-google-48.png';
 import instagramIcon from '../../../media/icons8-instagram-48-2.png';
 import linkedinIcon from '../../../media/icons8-linkedin-48.png';

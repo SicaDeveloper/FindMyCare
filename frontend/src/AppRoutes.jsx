@@ -4,7 +4,7 @@ import App from './App.jsx';
 import Home from './components/pages/Home.jsx';
 import ProtectedRoute from './components/utils/ProtectedRoutes.jsx';
 import UserDashboard from './components/pages/UserDashboard.jsx';
-import UserLogin from './components/pages/UserLogin.jsx';
+import UserLogin from './components/pages/LoginUser.jsx';
 import RegisterUser from './components/pages/RegisterUser.jsx';
 import RegisterNurse from './components/ui/RegisterUser/RegisterNurse.jsx';
 import RegisterCareSeeker from './components/ui/RegisterUser/RegisterCareSeeker.jsx';

@@ -16,7 +16,6 @@ import { useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { styled } from "@mui/material/styles";
-import { current } from "@reduxjs/toolkit";
 
 const defaultReviews = [
 	{

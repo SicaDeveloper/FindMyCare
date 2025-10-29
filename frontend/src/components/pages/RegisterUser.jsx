@@ -1,6 +1,6 @@
 import React from 'react';
 import RegisterPaper from '../ui/RegisterUser/RegisterPaper';
-import RegisterSideImage from '../ui/RegisterUser/RegisterSideImage';
+import SideImage from '../ui/SideImage';
 import { Box, Stack } from '@mui/material';
 import theme from '../utils/theme';
 
@@ -15,7 +15,7 @@ const RegisterUser = () => {
       <Stack sx={{
         width: '100%',
         height: '100%',
-        gap: 24,
+        gap: 20,
         flexDirection: {
           xs: 'column',
           sm: 'row',
@@ -24,7 +24,7 @@ const RegisterUser = () => {
         alignItems: 'center',
       }}>
         <RegisterPaper />
-        <RegisterSideImage />
+        <SideImage />
       </Stack>
     </Box>
   );

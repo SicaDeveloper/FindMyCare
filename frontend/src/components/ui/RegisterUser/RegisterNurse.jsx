@@ -13,6 +13,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormGroup from '@mui/material/FormGroup';
 import { useOutletContext } from 'react-router-dom';
+import axios from 'axios';
 
 
 const PreviewImage = styled('img')({
@@ -42,15 +43,20 @@ function RegisterNurse() {
 
     const [formData, setFormData] = useState({
         fullName: '',
-        panNumber: '',
-        gender: 'male',
-        phone: '',
-        dateOfBirth: '',
-        citizenshipNumber: '',
-        citizenshipIssuedDate: '',
-        experience: '',
         email: initialEmail || '',
         password: initialPassword || '',
+        phone: '',
+        gender: 'male',
+        panNumber: '',
+        dateOfBirth: '',
+        citizenship:{
+            citizenshipNumber: '',
+            citizenshipIssuedDate: '',
+            frontpath : '',
+            backpath : ''
+        },
+        experience: '',
+        rate : 0,
     });
 
     const [citizenshipFront, setCitizenshipFront] = useState(null);
@@ -187,39 +193,19 @@ function RegisterNurse() {
             return;
         }
 
-        const submissionData = new FormData();
-        submissionData.append('name', formData.fullName);
-        submissionData.append('panNumber', formData.panNumber);
-        submissionData.append('gender', formData.gender);
-        submissionData.append('phone', formData.phone);
-        submissionData.append('dateOfBirth', formData.dateOfBirth);
-        submissionData.append('citizenshipNumber', formData.citizenshipNumber);
-        submissionData.append('citizenshipIssuedDate', formData.citizenshipIssuedDate);
-        submissionData.append('email', formData.email);
-        submissionData.append('password', formData.password);
-        submissionData.append('experience', formData.experience.toString());
-
-
-        if (citizenshipFront) {
-            submissionData.append('citizenshipFront', citizenshipFront);
-        }
-        if (citizenshipBack) {
-            submissionData.append('citizenshipBack', citizenshipBack);
-        }
 
         try {
-            const response = await fetch('/api/register/nurse', {
-                method: 'POST',
-                body: submissionData,
-            });
+            console.log(formData);
+            const response = await axios.post('http://localhost:3000/api/nurse/register', formData, { withCredentials:true});
+
 
             const responseData = await response.json();
 
             if (response.ok) {
                 console.log("Registration successful:", responseData);
-                if (responseData.token) localStorage.setItem('token', responseData.token);
-                if (responseData.nurse) localStorage.setItem('user', JSON.stringify(responseData.nurse));
-                navigate('/nurse-dashboard');
+                if (responseData.token) cookieStore.set('token', responseData.token);
+                if (responseData.nurse) cookieStore.set('user', JSON.stringify(responseData.nurse));
+                navigate('/nurse/dashboard');
             } else {
                 setSubmitError(responseData.message || 'Registration failed. Please try again.');
             }

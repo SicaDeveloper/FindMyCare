@@ -1,20 +1,20 @@
 import React from 'react';
-import img1 from '../../../media/login-image-1.jpg';
-import img2 from '../../../media/login-image-2.jpg';
-import img3 from '../../../media/login-image-3.jpg';
+import img1 from '../../media/login-image-1.jpg';
+import img2 from '../../media/login-image-2.jpg';
+import img3 from '../../media/login-image-3.jpg';
 import { useEffect } from 'react';
 
 
 const RegisterSideImage = () => {
-    const [imagePostion, setImagePosition] = React.useState(1);
+    const [imagePosition, setImagePosition] = React.useState(0);
     const [imageTimeout, setImageTimeout] = React.useState(null);
     const [onMouseEnter, setOnMouseEnter] = React.useState(false);
 
     function changeImagePosition() {
-        if (imagePostion === 4) {
-            setImagePosition(1);
+        if (imagePosition === 3) {
+            setImagePosition(0);
         } else {
-            setImagePosition(imagePostion + 1);
+            setImagePosition(imagePosition + 1);
         }
     }
 
@@ -41,9 +41,9 @@ const RegisterSideImage = () => {
 
     return (
         <img
-            src={images[imagePostion - 1]}
+            src={images[imagePosition]}
             alt="Login Side"
-            style={{ width: '900px', height: '900px', objectFit: 'cover', borderRadius: '20px' }}
+            style={{ maxWidth: '700px', maxHeight: '700px', aspectRatio: '1/1', objectFit: 'cover', borderRadius: '20px' }}
         />
     );
 };

@@ -1,9 +1,9 @@
 import { Box, Stack } from "@mui/system";
-import theme from "../utils/theme";
-import LoginNurse from "../ui/LoginPage/LoginNurse";
-import SideImage from "../ui/LoginPage/LoginSideImage";
+import theme from "../utils/theme.jsx";
+import LoginNurse from "../ui/LoginPage/LoginNurse.jsx";
+import SideImage from "../ui/SideImage.jsx";
 import { useLocation } from "react-router-dom";
-import LoginCareSeeker from "../ui/LoginPage/LoginCareSeeker";
+import LoginCareSeeker from "../ui/LoginPage/LoginCareSeeker.jsx";
 import { useAuth } from "../../hooks/useAuth.js";
 import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
