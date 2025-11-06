@@ -88,7 +88,7 @@ function Statistics() {
                 xs: 'max-content',
                 sm: 400,
                 md: 450,
-                lg: 500,
+                lg: 550,
             }, width: {
                 xs: '100%',
                 sm: '100%',

@@ -10,7 +10,7 @@ import Calender from '../ui/NurseDashboard/Calender';
 import Patient from '../ui/NurseDashboard/Patient';
 import Events from '../ui/NurseDashboard/Events';
 import Statistics from '../ui/NurseDashboard/Statistics';
-import Appointments from '../ui/UserDashboard/Appointments';
+import Appointments from '../ui/NurseDashboard/Appointments';
 
 const NurseDashboard = () => {
 	return (

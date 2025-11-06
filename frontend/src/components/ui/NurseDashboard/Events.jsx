@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box, Stack } from '@mui/material';
+import { Typography, Paper, Stack, Button, Box } from '@mui/material';
+import theme from '../../utils/theme';
 
 const events = [
     {
@@ -29,24 +30,30 @@ const events = [
 ];
 
 const EventCard = ({ event }) => (
-    <Card sx={{ mb: 2, background: '#fafafa' }}>
-        <CardContent>
-            <Typography variant="h6" gutterBottom>
-                {event.title}
-            </Typography>
-            <Stack spacing={0.5}>
-                <Typography variant="body2"><strong>Date:</strong> {event.date}</Typography>
-                <Typography variant="body2"><strong>Time:</strong> {event.time}</Typography>
-                <Typography variant="body2"><strong>Location:</strong> {event.location}</Typography>
-                <Typography variant="body2">{event.description}</Typography>
-            </Stack>
-        </CardContent>
-    </Card>
+    <Box sx={{
+        display:'flex',
+        gap: 4,
+        justifyContent: 'space-between',
+        px:2, py:2
+    }}>
+        <Stack sx={{
+            gap:1
+        }}>
+            <Typography>{event.time}</Typography>
+            <Typography>{event.title}</Typography>
+        </Stack>
+        <Button variant='contained' sx={{
+            bgcolor: theme.palette.grey[900],
+            borderRadius : 3
+        }} >Start Shift</Button>
+    </Box>
 );
 
 const Events = () => (
-    <Box>
-        <Typography variant="h5" gutterBottom>
+    <Paper elevation={1} sx={{
+        px:5, py: 4, borderRadius: 8, bgcolor:"white"
+    }}>
+        <Typography variant="h6" gutterBottom>
             Upcoming Events
         </Typography>
         {events.length === 0 ? (
@@ -54,7 +61,7 @@ const Events = () => (
         ) : (
             events.map(event => <EventCard key={event.id} event={event} />)
         )}
-    </Box>
+    </Paper>
 );
 
 export default Events;

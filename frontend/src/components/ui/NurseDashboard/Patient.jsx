@@ -1,9 +1,13 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardContent, Typography, Button, Paper } from '@mui/material';
 
 const Patient = ({ patient, onSelect }) => {
     if (!patient) {
-        return <Typography>No patient selected.</Typography>;
+        return (
+            <Paper sx={{px:5, py: 4, borderRadius: 8, height:300, width:400, bgcolor:'white'}}>
+                <Typography>No patient selected.</Typography>
+            </Paper>
+        );
     }
 
     return (
@@ -21,9 +25,9 @@ const Patient = ({ patient, onSelect }) => {
                 <Typography variant="body2" color="text.secondary">
                     <strong>Condition:</strong> {patient.condition}
                 </Typography>
-                <Button 
-                    variant="contained" 
-                    sx={{ mt: 2 }} 
+                <Button
+                    variant="contained"
+                    sx={{ mt: 2 }}
                     onClick={() => onSelect(patient.id)}
                 >
                     View Details
